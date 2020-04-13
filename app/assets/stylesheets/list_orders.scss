@@ -38,6 +38,7 @@ a {
 
 a:focus {
   outline: none !important;
+
 }
 
 a:hover {
@@ -301,4 +302,7 @@ tbody tr:hover {
     padding-left: 15px;
     padding-right: 15px;
   }
+}
+a .black {
+  color: black;
 }
