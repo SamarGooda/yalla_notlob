@@ -1,19 +1,17 @@
 class FriendsController < ApplicationController
 
    def index
+    @all_friends = User.joins("INNER JOIN friends ON friends.friend_id = users.id")
 
   end
+
+  # def  show
+  # end
    
 
-   def search  
-    if params[:search].blank?  
-      redirect_to( "/", alert: "Empty field!") and return
-    else  
+   def search   
       @parameter = params[:search] 
-      # @users = User.where(" email LIKE :search", search: @parameter).first(1)
       @user = User.where(" email LIKE :search", search: @parameter).first
-
-      
       userid=1
     if @user
       @friend=Friend.new
@@ -22,25 +20,8 @@ class FriendsController < ApplicationController
       @friend.status="true"
       @friend.save()
     end
-    @all_friends=[]
-    @user_loged=User.where(id: userid).first
-    @friends=@user_loged.friends.order("created_at DESC") 
-    p  @friends
-    @friends.each do |friend_data|
-      friend = User.where("id = ? ", friend_data)
-      @all_friends += friend if friend
-    end
-    @all_friends
 
-
-
-      # @all_friends = User.all.joins(:friends)
-
-
-      
-
-    
-    end 
+    @all_friends = User.joins("INNER JOIN friends ON friends.friend_id = users.id")
   end
  
 
