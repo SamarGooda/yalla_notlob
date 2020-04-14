@@ -15,11 +15,30 @@ class FriendsController < ApplicationController
 
       
       userid=1
+    if @user
       @friend=Friend.new
-      @friend.id=@user.id
+      @friend.friend_id=@user.id
       @friend.user_id=userid
       @friend.status="true"
       @friend.save()
+    end
+    @all_friends=[]
+    @user_loged=User.where(id: userid).first
+    @friends=@user_loged.friends.order("created_at DESC") 
+    p  @friends
+    @friends.each do |friend_data|
+      friend = User.where("id = ? ", friend_data)
+      @all_friends += friend if friend
+    end
+    @all_friends
+
+
+
+      # @all_friends = User.all.joins(:friends)
+
+
+      
+
     
     end 
   end

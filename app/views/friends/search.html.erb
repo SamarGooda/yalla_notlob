@@ -1,7 +1,19 @@
-<h1>search results:
-<% if @allfriends %>
+<% if @user %>
+   <div class="alert alert-success" role="alert">
+<% else %>
+<div class="alert alert-warning" role="alert">
+  No user with this email
+</div>
+
+<% end %>
+
+
+<% if @all_friends %>
    <% @all_friends.each do |friend| %>  
+
              <h3>   <%= friend.Fname %>  <%= friend.Lname %></h3><br>  
+                     <%= submit_tag("un friend",class:"btn btn-success  btn-block") %>
+
 
     <% end %>
 
