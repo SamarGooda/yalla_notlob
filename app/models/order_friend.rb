@@ -1,0 +1,2 @@
+class OrderFriend < ApplicationRecord
+end
