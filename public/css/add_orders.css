@@ -1,0 +1,12 @@
+ .signup-image {
+                 margin-top: 45px;
+                 margin: 0 55px;
+                 width: 50%;
+                 overflow: hidden;
+                 border: 1px solid black;
+
+ }
+ .signup-form{
+     width: 50%;
+     float:left;
+ }
