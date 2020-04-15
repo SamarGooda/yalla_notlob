@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_145742) do
     t.string "fname", default: "", null: false
     t.string "lname", default: "", null: false
     t.string "image", default: "", null: false
-    t.string "password", default: "", null: false
+    t.string "password_digest", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
