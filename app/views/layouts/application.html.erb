@@ -33,6 +33,18 @@
 						<a href="#" data-nav-section="menu">Menu</a>
 						<a href="#" data-nav-section="events">Events</a>
 						<a href="#" data-nav-section="reservation">Reservation</a>
+					<% if logged_in?  %>
+						<li class="nav-item btn-group">
+							<a class="dropdown-toggle nav-link" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="">
+								<%= fa_icon "bell" %>
+							</a>
+							<div class="dropdown-menu" aria-labelledby= "dropdownMenu1">
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Another Action</a>
+								<a class="dropdown-item" href="#">Third Action</a>
+							</div>
+						</li>
+					<% end %>
 					</div>
 				</div>
 				
