@@ -13,7 +13,22 @@
 
 
 
+<% if @all_friends %>
+   <% @all_friends.each do |friend| %>  
+   <div class="card" style="width: 18rem;">
 
+ <div class="card-body">
+                 <h5 class="card-title"> <%= friend.Fname %>  <%= friend.Lname %></h5>
+
+                        <a href="#" class="btn btn-primary">unfriend</a>
+                          </div>
+</div>
+
+
+
+    <% end %>
+
+<% end %>
   
 
 
