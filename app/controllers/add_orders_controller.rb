@@ -8,16 +8,12 @@ class AddOrdersController < ApplicationController
     # @order = Order.create(params.require(:order).permit(:kind, :resturant ,:user ,:status))
 
     @order = Order.new
-    @order.kind= params[:kind]
-    @order.resturant=params[:resturant]
-    @order.status=params[:status]
-    @order.created_at=DateTime.now
-    @order.updated_at=DateTime.now
-    @order.user_id = @current_user.id
-    p @order.errors
-    redirect_to 'orders_path'
-    p "result: ", @order.save
-    p "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+    @order.kind= params.require(:order)[:kind]
+    @order.resturant= params.require(:order)[:resturant]
+    @order.status= params.require(:order)[:status]
+    @order.user_id = current_user.id
+    @order.save
+    redirect_to '/orders'    
 
 end
 end
