@@ -1,9 +1,5 @@
 class HomeController < ApplicationController
   def index
-    # @post = Post.new
-    # @post.title = params[:title]
-    # @post.content = params[:content]
-    # @post.save
     @notification = Notification.new
     @notification.recipient_id = current_user.id
     @notification.actor_id = current_user.id
