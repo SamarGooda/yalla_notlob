@@ -8,12 +8,10 @@
 
     <div class="form-group row">
       <div class="col-sm-10">
-        <select class="form-control friend-head-add" id="order_name" name="order[name]">
-          <option selected>Choose Your Meal</option>
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-        </select>
+
+
+       <%= f.select(:kind, [ 'Breakfast', 'Lunch','Dinner' ], {}, { :class => 'select' }) %>
+
       </div>
     </div>
 
