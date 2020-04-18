@@ -31,13 +31,19 @@
 
       </ul>
     </div>
-    <div class="custom-file row">
-      <div class="col-sm-10">
-        <label class="custom-file-label" for="validatedCustomFile">Choose Menu Image file...</label>
-      </div>
-      <div class="col-sm-10">
-        <%= f.file_field :avatar , {:class => 'custom-file-input form-control friend-head-add'}%>
-      </div>
+<!--    <div class="custom-file row">-->
+<!--      <div class="col-sm-10">-->
+<!--        <label class="custom-file-label" for="validatedCustomFile">Choose Menu Image file...</label>-->
+<!--      </div>-->
+<!--      <div class="col-sm-10">-->
+        <%#= f.file_field :avatar , {:class => 'custom-file-input form-control friend-head-add'}%>
+<!--      </div>-->
+<!--    </div>-->
+    <div class="custom-file">
+      <%= f.label(:image, "Menu image : ", class: "custom-file-label") %>
+      <%= f.file_field :menu, {:accept =>'image/jpg', :class => 'custom-file-input', :required => true } %>
+
+      <%#= @order.errors[:menu].first %>
     </div>
     <br>
     <div class="action row">

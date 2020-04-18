@@ -12,8 +12,12 @@ class AddOrdersController < ApplicationController
     @order.resturant= params.require(:order)[:resturant]
     @order.status= params.require(:order)[:status]
     @order.user_id = current_user.id
-    @order.save
-    redirect_to '/orders'    
+    @order.img=params.require (:order)[menu: uploaded_io.original_filename]
 
+    @order.save
+    redirect_to '/orders'
+
+
+    # params.require(:order).permit(:order_type, :resturant, :menu)
 end
 end
