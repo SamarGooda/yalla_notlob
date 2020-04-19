@@ -40,10 +40,13 @@
 <!--      </div>-->
 <!--    </div>-->
     <div class="custom-file">
-      <%= f.label(:image, "Menu image : ", class: "custom-file-label") %>
-      <%= f.file_field :menu, {:accept =>'image/jpg', :class => 'custom-file-input', :required => true } %>
-
+      <%#= f.label(:image, "Menu image : ", class: "custom-file-label") %>
+      <%#= f.file_field :menu, {:accept =>'image/jpg', :class => 'custom-file-input', :required => true } %>
       <%#= @order.errors[:menu].first %>
+      <%= f.label :image do  %>
+      <%= f.file_field :image %>
+
+      <%end%>
     </div>
     <br>
     <div class="action row">

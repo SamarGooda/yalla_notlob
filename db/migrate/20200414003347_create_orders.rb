@@ -5,7 +5,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
         t.string :kind
         t.string :resturant
         t.string :status
-        t.string :img
+        t.string :menu
         t.timestamps
       end
     end

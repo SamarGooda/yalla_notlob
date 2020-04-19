@@ -79,7 +79,7 @@
 <!--              <input type="image" name="image" id="image" placeholder="Upload menu image"/>-->
 <!--            </div>-->
 
-<!--            how to upload img-->
+<!--            how to uploads img-->
 <!--            <div class="custom-file row">-->
 <!--              <div class="col-sm-10">-->
 <!--                <label class="custom-file-label" for="validatedCustomFile">Choose Menu Image file...</label>-->
@@ -112,58 +112,60 @@
 <!--</section>-->
 
 
-<%= form_for [@user,@order] do |f| %>
-  <div class="alert alert-success center" role="alert">
+<%#= form_for [@user,@order] do |f| %>
+<!--  <div class="alert alert-success center" role="alert">-->
 
-    <div class="form-group row">
-      <div class="col-sm-10">
-        <select class="form-control friend-head-add" id="order_name" name="order[name]">
-          <option selected>Choose Your Meal</option>
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-        </select>
-      </div>
-    </div>
+<!--    <div class="form-group row">-->
+<!--      <div class="col-sm-10">-->
+<!--        <select class="form-control friend-head-add" id="order_name" name="order[name]">-->
+<!--          <option selected>Choose Your Meal</option>-->
+<!--          <option value="breakfast">Breakfast</option>-->
+<!--          <option value="lunch">Lunch</option>-->
+<!--          <option value="dinner">Dinner</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <div class="form-group row">
-      <div class="col-sm-10">
-<%= f.text_field :resturant, {:class => 'form-control friend-head-add', :placeholder => "Enter Restaurant"} %>
-      </div>
-    </div>
+<!--    <div class="form-group row">-->
+<!--      <div class="col-sm-10">-->
+<%#= f.text_field :resturant, {:class => 'form-control friend-head-add', :placeholder => "Enter Restaurant"} %>
+<!--      </div>-->
+<!--    </div>-->
 
 <!--    <div class="form-group row">-->
 <!--      <div class="col-sm-10">-->
 <%#= f.text_field :user_name, data: {autocomplete_source: users_path}, :class => "form-control friend-head-add", :placeholder => "Search for Friends to invite"%>
 <!--      </div>-->
 <!--    </div>-->
-    <div class="field">
-      <ul id="added">
+<!--    <div class="field">-->
+<!--      <ul id="added">-->
 
-      </ul>
-    </div>
-    <div class="custom-file row">
-      <div class="col-sm-10">
-        <label class="custom-file-label" for="validatedCustomFile">Choose Menu Image file...</label>
-      </div>
-      <div class="col-sm-10">
-<%= f.file_field :avatar , {:class => 'custom-file-input form-control friend-head-add'}%>
-      </div>
-    </div>
-    <br>
-    <div class="action row">
-      <div class="col-sm-10">
-        <div class="form-group form-button">
-          <input type="submit" value="Publish" width="50"/>
-        </div>
-      </div>
-    </div>
-<% end %>
-<%= link_to 'Back', orders_path %>
+<!--      </ul>-->
+<!--    </div>-->
+<!--    <div class="custom-file row">-->
+<!--      <div class="col-sm-10">-->
+<!--        <label class="custom-file-label" for="validatedCustomFile">Choose Menu Image file...</label>-->
+<!--      </div>-->
+<!--      <div class="col-sm-10">-->
+<%#= f.file_field :avatar , {:class => 'custom-file-input form-control friend-head-add'}%>
+<!--      </div>-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <div class="action row">-->
+<!--      <div class="col-sm-10">-->
+<!--        <div class="form-group form-button">-->
+<!--          <input type="submit" value="Publish" width="50"/>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<%# end %>
+<%#= link_to 'Back', orders_path %>
 
 
 
-</div>
+<!--</div>-->
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->
+
+
