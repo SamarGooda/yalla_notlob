@@ -1,2 +1,0 @@
-class UserFriend < ApplicationRecord
-end

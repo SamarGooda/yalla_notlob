@@ -23,6 +23,9 @@ class FriendsController < ApplicationController
 
     @all_friends = User.joins("INNER JOIN friends ON friends.friend_id = users.id")
   end
+
+
+
  
 
 

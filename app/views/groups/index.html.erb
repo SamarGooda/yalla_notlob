@@ -1,5 +1,18 @@
+<% if @grouping %>
+    <div class="alert alert-success" role="alert">
+     you friend is added to this group
+</div>
+
+
+ <% end %>
 <h3>your groups</h3>  
 
     <% @groups.each do |group| %>  
-        <%= group.name %><br>  
+     <h3>   <%= group.name %></h3>
+    <a href="<%= edit_group_path(group) %>" class="btn btn-primary">add friend</a>
+    <%= link_to  "delete", group, method: :delete ,class:"btn btn-danger" %>
     <% end %>
+
+
+
+    
