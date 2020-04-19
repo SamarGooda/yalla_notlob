@@ -1,0 +1,8 @@
+<%= link_to 'All orders', orders_path %>
+<h1><%= @order.resturant %></h1>
+
+<%= image_tag(@order.image.url, alt: 'Image') if @order.image? %>
+
+<p><%= @order.body %></p>
+
+<p><%= orders %></p>

@@ -11,6 +11,7 @@ class AddOrdersController < ApplicationController
     @order.kind= params.require(:order)[:kind]
     @order.resturant= params.require(:order)[:resturant]
     @order.status= params.require(:order)[:status]
+    @order.image= params.require(:order)[:img3]
     @order.user_id = current_user.id
     @order.status = "waiting"
     # @order.img=params.require (:order)[menu: uploaded_io.original_filename]
