@@ -1,0 +1,15 @@
+current directory: /home/salama/yalla_notlob/vendor/bundle/gems/bindex-0.8.1/ext/skiptrace
+/usr/local/rvm/rubies/ruby-2.6.3/bin/ruby -r ./siteconf20200413-32670-sfanm0.rb extconf.rb
+creating Makefile
+
+current directory: /home/salama/yalla_notlob/vendor/bundle/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /home/salama/yalla_notlob/vendor/bundle/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /home/salama/yalla_notlob/vendor/bundle/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20200413-32670-1sqrl7w/skiptrace/internal

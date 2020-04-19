@@ -26,5 +26,8 @@ class AddOrdersController < ApplicationController
     @orders = Order.all()
 
   end
+  def search
+
+  end
 
   end

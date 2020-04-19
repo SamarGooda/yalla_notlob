@@ -1,0 +1,8 @@
+
+<%= form_tag( groups_path, method: "post") do %>
+  <div class="form-group">
+  <%= text_field_tag(:name, nil,placeholder: "Group Name", class:"form-control") %>
+  </div>
+  
+  <%= submit_tag("Create",class:"btn btn-success  btn-block") %>
+<% end %>

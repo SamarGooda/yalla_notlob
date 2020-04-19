@@ -1,4 +1,5 @@
 class AuthinticationController < ApplicationController
+        
     skip_before_action :authorized
     def index
         @user = User.new
@@ -13,8 +14,10 @@ class AuthinticationController < ApplicationController
     
     def login
         @user = User.find_by(email: params[:email])
+
         if @user && @user.authenticate(params[:password])
            session[:user_id] = @user.id
+
            redirect_to '/home'
         else
            redirect_to '/'

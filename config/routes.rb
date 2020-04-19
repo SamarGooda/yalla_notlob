@@ -8,5 +8,12 @@ Rails.application.routes.draw do
   get '/orders' => 'add_orders#list'
   # get '/orders' => 'list_orders#index'
   post '/add' => 'add_orders#add'
+
+  get '/friends/search' => 'friends#search', :as => 'search_page'
+
+  resources :friends
+  resources :groups
+  
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
