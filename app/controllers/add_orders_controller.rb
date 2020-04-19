@@ -11,7 +11,7 @@ class AddOrdersController < ApplicationController
     @order.kind= params.require(:order)[:kind]
     @order.resturant= params.require(:order)[:resturant]
     @order.status= params.require(:order)[:status]
-    @order.image= params.require(:order)[:img3]
+    @order.image= params.require(:order)[:img]
     @order.user_id = current_user.id
     @order.status = "waiting"
     # @order.img=params.require (:order)[menu: uploaded_io.original_filename]
@@ -20,16 +20,11 @@ class AddOrdersController < ApplicationController
     @order.save
     redirect_to '/orders'
     uploaded_io = params.require(:order)[:menu]
-  #   File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
-  #     file.write(uploaded_io.read)
-  #
-  #   # params.require(:order).permit(:order_type, :resturant, :menu)
-  #   end
-  #   order = Order.create(user_id: current_user.id,resturant: params[:order][:resturant], order_type: params[:order][:order_type], menu: uploaded_io.original_filename, status: "waiting")
   end
 
-  # private
-  # def orderParameters
-  #   params.require(:order).permit(:order_type, :resturant, :menu)
-  # end
+  def list
+    @orders = Order.all()
+
+  end
+
   end

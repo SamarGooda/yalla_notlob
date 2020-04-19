@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   root :to => "authintication#index"
   get '/home' => 'home#index'
   get '/orders/add' => 'add_orders#index'
-  get '/orders' => 'list_orders#index'
+  get '/orders' => 'add_orders#list'
+  # get '/orders' => 'list_orders#index'
   post '/add' => 'add_orders#add'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
