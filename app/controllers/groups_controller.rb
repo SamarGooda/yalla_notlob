@@ -21,23 +21,25 @@ class GroupsController < ApplicationController
       end
 
 
-      def edit
+      def update
         @all_friends = User.joins("INNER JOIN friends ON friends.friend_id = users.id")
 
         @parameter = params[:search] 
         @user = User.where("email LIKE :search", search: @parameter)
         # p @user.ids
-        @friend = Friend.where(friend_id: @user.ids)
-        p @friend.ids
+        @friend = Friend.where(friend_id: @user.ids ).where(user_id: 1)
+
+        p "iiiiiiiiiiiii"
+
+        p @friend.ids[0]
+        p "iiiiiiiiiiiiiiiiiiiiii"
 
         @group =Groupfriend.new
-        @group.friend_id =@friend.ids
-        p @group.friend
-
+        @group.friend_id =@friend.ids[0]
         @groupid=params[:id]
         @group.group_id = @groupid
         # p @group.group_id
 
-        @group.save!()
+        @group.save()
       end
 end

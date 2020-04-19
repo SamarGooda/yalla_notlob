@@ -1,6 +1,6 @@
 class Group < ApplicationRecord
-  has_many :groupfriends
-  has_many :friends, through: :groupfriends
+  # has_many :groupfriends
+  # accepts_nested_attributes_for :groupfriends
 
 
 end
