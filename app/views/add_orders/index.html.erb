@@ -49,10 +49,9 @@
 
               <div class="custom-file">
 
-                <%#= f.label :img do %>
-                  <%#= f.file_field :img, value: @order.img %>
-
-                <%# end %>
+                <%= f.label :img do %>
+                  <%= f.file_field :img, value: @order.image %>
+                <% end %>
               </div>
               <br>
 
