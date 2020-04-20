@@ -2,15 +2,17 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
+<!--[if gt IE 8]><!--> 
+<html class="no-js"> <!--<![endif]-->
+<head>
+
   <title>YallaNotlob</title>
 
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'true' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
+	
   <!-- Modernizr JS -->
   <script src="/js/modernizr-2.6.2.min.js"></script>
 	</head>
@@ -34,15 +36,14 @@
 						<a href="#" data-nav-section="events">Events</a>
 						<a href="#" data-nav-section="reservation">Reservation</a>
 					<% if logged_in?  %>
-						<li class="nav-item btn-group">
-							<a class="dropdown-toggle nav-link" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="">
-								<%= fa_icon "bell" %>
+						<li class="nav-item btn-group" data-behavior = "notifications">
+							<a class="dropdown-toggle nav-link" type="button" id="dropdownMenu1" data-behavior="notifications-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="">
+								<%= fa_icon "bell" %><span data-behavior="unread-count"></span>
 							</a>
-							<div class="dropdown-menu" aria-labelledby= "dropdownMenu1">
-								<a class="dropdown-item" href="#">Action</a>
-								<a class="dropdown-item" href="#">Another Action</a>
-								<a class="dropdown-item" href="#">Third Action</a>
+							<div class="dropdown-menu" aria-labelledby= "dropdownMen"  data-behavior = "notification-item" style="line-height: 20%;width:262px; height: 250px; overflow: auto;">
+
 							</div>
+							
 						</li>
 					<% end %>
 					</div>
@@ -56,7 +57,7 @@
 		<%= yield %>
 	</div>
 
-	<div id="fh5co-footer" style= "position:absolute; top:500px;">
+	<div id="fh5co-footer" style= "position:absolute; top:7500px;">
 		<div class="container">
 			<div class="row row-padded">
 				<div class="col-md-12 text-center">
@@ -75,10 +76,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
-
-		
+	</div>		
 	<!-- jQuery -->
 	<script src="/js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
@@ -102,11 +100,7 @@
 	</script>
 	<!-- Main JS -->
 	<script src="/js/main.js"></script>
-
-	
-	
-
-
+	<%= javascript_pack_tag 'notifications' %>
 
 	</body>
 </html>
