@@ -11,19 +11,25 @@ class AddOrdersController < ApplicationController
     if params[:commit] == 'Add'
       @parameter = params[:search]
       @user = User.where(email: @parameter).first
+      # p("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+      # p(@parameter)
       if @user
         # for i in $list do
+        #   p("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
         #   p(i)
         #   p(@parameter)
         #   if i == @parameter
+        #     p("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
         #     p(i)
         #     p(@parameter)
         #   else
+        #     p("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
         #     p(i)
         #     p(@parameter)
         #     $list.append(@parameter)
         #   end
         # end
+        # p($list)
         $list.append(@parameter)
         @order = Order.new
         @order.kind = params.require(:order)[:kind]
@@ -73,7 +79,11 @@ class AddOrdersController < ApplicationController
     end
 
 
-    def search
+    def delete
+      @order = Order.find(params[:id])
+      @order.destroy()
+      redirect_to '/orders'
+
 
     end
 
