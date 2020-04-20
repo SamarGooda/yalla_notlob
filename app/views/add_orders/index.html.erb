@@ -2,6 +2,17 @@
 
 
 <%#= form_for [@user,@order] do |f| %>
+<head>
+  <link rel="stylesheet" href="/css/add_orders.css">
+</head>
+<body>
+<div class="main">
+
+  <!-- Sign up form -->
+  <section class="signup">
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-form">
 <%= form_for(@order ,url: "/add") do |f| %>
 
   <div class="alert alert-success center" role="alert">
@@ -17,7 +28,7 @@
 
     <div class="form-group row">
       <div class="col-sm-10">
-        <%= f.text_field :resturant, {:class => 'form-control friend-head-add', :placeholder => "Enter Restaurant"} %>
+        <%= f.text_field :resturant, {:class => 'form-control friend-head-add', :placeholder => "Enter Restaurant" ,:style => 'width: 350px'} %>
       </div>
     </div>
 
@@ -35,6 +46,17 @@
       <%end%>
     </div>
     <br>
+    <%= form_tag(search_page_path, :method => "get", class: 'navbar-form navbar-left') do %>
+      <div class="input-group">
+        <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" ,:style => 'width: 350px'%>
+        <%= submit_tag("Add", width:"100px") %>
+        <div class="input-group-btn">
+
+
+        </div>
+      </div>
+    <% end %>
+
     <div class="action row">
       <div class="col-sm-10">
         <div class="form-group form-button">
@@ -42,10 +64,38 @@
         </div>
       </div>
     </div>
+
 <% end %>
+
+
 <%= link_to 'Back', orders_path %>
 
 
 </div>
 
+        </div>
+
+
+        <div class="signup-image">
+          <% if @all_friends %>
+            <% @all_friends.each do |friend| %>
+              <div class="card" style="width: 18rem;">
+
+                <div class="card-body">
+                  <h5 class="card-title"> <%= friend.fname %>  <%= friend.lname %></h5>
+
+                  <a href="#" class="btn btn-primary">Remove</a>
+                </div>
+              </div>
+
+
+
+            <% end %>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
 

@@ -27,7 +27,17 @@ class AddOrdersController < ApplicationController
 
   end
   def search
+    @parameter = params[:search]
+    @user = User.where(" email LIKE :search", search: @parameter).id
+    if @user
+      @friend=Friend.new
+      @friend.friend_id=@user.id
+      @friend.user_id=userid
+      @friend.status="true"
+      @friend.save()
+    end
 
+    @all_friends = User.joins("INNER JOIN friends ON friends.friend_id = users.id")
   end
 
   end
