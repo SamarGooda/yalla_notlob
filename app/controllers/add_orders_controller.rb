@@ -1,43 +1,72 @@
 class AddOrdersController < ApplicationController
+  $list=[]
+
   def index
     @order = Order.new
+    @member_list = $list
   end
 
   def add
+    # @order = Order.new
+    # p($list)
+    # $list.append(params[:search])
+    # p($list)
+    # render :index
 
-    # @order = Order.create(params.require(:order).permit(:kind, :resturant ,:user ,:status))
+    if params[:commit] == 'Add'
+      @parameter = params[:search]
+      @user = User.where( email: @parameter ).first
+      if @user
+        if not @parameter in $list
+           $list.append(@parameter)
+        end
+        @order = Order.new
+        @order.kind = params.require(:order)[:kind]
+        @order.resturant = params.require(:order)[:resturant]
+        @order.status = params.require(:order)[:status]
+        @order.image = params.require(:order)[:img]
+        @member_list = $list
+        render :index
+      else
+        @order = Order.new
+        @order.kind = params.require(:order)[:kind]
+        @order.resturant = params.require(:order)[:resturant]
+        @order.status = params.require(:order)[:status]
+        @order.image = params.require(:order)[:img]
+        @member_list = $list
+        render :index
+      end
 
-    @order = Order.new
-    @order.kind= params.require(:order)[:kind]
-    @order.resturant= params.require(:order)[:resturant]
-    @order.status= params.require(:order)[:status]
-    @order.image= params.require(:order)[:img]
-    @order.user_id = current_user.id
-    @order.status = "waiting"
-    # @order.img=params.require (:order)[menu: uploaded_io.original_filename]
-    # @order.menu = params.require(:order)[:menu].original_filename
+    elsif params[:commit] == 'Publish'
+        @order = Order.new
+        @order.kind = params.require(:order)[:kind]
+        @order.resturant = params.require(:order)[:resturant]
+        @order.status = params.require(:order)[:status]
+        @order.image = params.require(:order)[:img]
 
-    @order.save
-    redirect_to '/orders'
-    uploaded_io = params.require(:order)[:menu]
+        @order.user_id = current_user.id
+        @order.status = "waiting"
+        # @order.img=params.require (:order)[menu: uploaded_io.original_filename]
+        # @order.menu = params.require(:order)[:menu].original_filename
+
+        @order.save
+        #loop list f friends
+        #  @friend = OrderFriend.new
+        #         @friend.user_id = @user.id
+        #         # @friend.user_id = current_user.id
+        #         @friend.status = "invite"
+        @friend.save()
+        redirect_to '/orders'
+        uploaded_io = params.require(:order)[:menu]
   end
-
+    end
   def list
     @orders = Order.all()
-
   end
+
+
   def search
-    @parameter = params[:search]
-    @user = User.where(" email LIKE :search", search: @parameter).id
-    if @user
-      @friend=Friend.new
-      @friend.friend_id=@user.id
-      @friend.user_id=userid
-      @friend.status="true"
-      @friend.save()
-    end
-
-    @all_friends = User.joins("INNER JOIN friends ON friends.friend_id = users.id")
-  end
 
   end
+end
+
