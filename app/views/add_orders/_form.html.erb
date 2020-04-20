@@ -1,67 +1,171 @@
 
-<head>
+<!--<head>-->
   <!-- Main css -->
-  <link rel="stylesheet" href="/css/add_orders.css">
-</head>
-<body>
+<!--  <link rel="stylesheet" href="/css/add_orders.css">-->
+<!--  <script language="JavaScript">-->
+<!--      function showInput() {-->
 
-<div class="main">
-  <section class="signup">
-    <div class="container">
-      <div class="signup-content">
-        <div class="signup-form">
-          <h2 class="form-title">Add Order</h2>
+
+
+<!--          var b = document.createElement('button');-->
+<!--          b.innerHTML = 'test value';-->
+<!--          document.getElementById('display').innerHTML +=  " "+ document.getElementById("user_input").value + b-->
+<!--          document.getElementById('display').innerHTML .appendChild(b);-->
+
+<!--      }-->
+<!--  </script>-->
+<!--</head>-->
+
+<!--<div class="main">-->
+<!--  <section class="signup">-->
+<!--    <div class="container">-->
+<!--      <div class="signup-content">-->
+<!--        <div class="signup-form">-->
+<!--          <h2 class="form-title">Add Order</h2>-->
 
           <%#= form_with(model: @order , local: true, url: "/add") do |f|%>
-            <%= form_for(order ,url: "/add") do |f| %>
-        <div class="form-group">
-              <label for="order_for">Order for:</label>
-              <%= f.text_field :kind, placeholder: "Breakfast" %>
+            <%#= form_for(order ,url: "/add") do |f| %>
+<!--        <div class="form-group">-->
+<!--              <label for="order_for">Order for:</label>-->
+              <%#= f.text_field :kind, placeholder: "Breakfast" %>
               <!--              <select id="order_for" name="type">-->
               <!--                <option value="breakfast">Breakfast</option>-->
               <!--                <option value="lunch">Lunch</option>-->
               <!--                <option value="dinner">Dinner</option>-->
               <!--              </select>-->
-            </div>
+<!--            </div>-->
+<!--            <div class="form-group row">-->
+<!--              <div class="col-sm-10">-->
+<!--                <select class="form-control friend-head-add" id="order_name" name="order[name]">-->
+<!--                  <option selected>Choose Your Meal</option>-->
+<!--                  <option value="breakfast">Breakfast</option>-->
+<!--                  <option value="lunch">Lunch</option>-->
+<!--                  <option value="dinner">Dinner</option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--            </div>-->
 
-            <div class="form-group">
-              <label for="resturant"></label>
-              <%= f.text_field :resturant, placeholder: "cook door" %>
+<!--            <div class="form-group">-->
+<!--              <label for="resturant"></label>-->
+              <%#= f.text_field :resturant, placeholder: "cook door" %>
               <!--              <input type="text" name="resturant" id="from" placeholder="write the restaurant name"/>-->
-            </div>
-            <div class="form-group">
-              <label for="choose"></label>
-              <%#= f.text_field :friend, placeholder: "friend" %>
+<!--            </div>-->
+<!--            <div class="form-group row">-->
+<!--              <div class="col-sm-10">-->
+                <%#= f.text_field :resturant, {:class => 'form-control friend-head-add', :placeholder => "Enter Restaurant"} %>
+<!--              </div>-->
+<!--            </div>-->
 
-            </div>
-            <div class="form-group">
-              <label for="img"></label>
-              <input type="image" name="image" id="image" placeholder="Upload menu image"/>
-            </div>
+<!--                  how to search for your friends-->
+<!--            <div class="form-group row">-->
+<!--              <div class="col-sm-10">-->
+                <%#= f.text_field :user_name, data: {autocomplete_source: users_path}, :class => "form-control friend-head-add", :placeholder => "Search for Friends to invite"%>
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="field">-->
+<!--              <ul id="added">-->
 
-            <div class="form-group form-button">
-              <input type="submit" value="Publish"/>
-<!--                            <input type="submit" name="publish" id="publish" class="form-submit" value="Publish"/>-->
-            </div>
-          <%end%>
+<!--              </ul>-->
 
-        </div>
-        <div class="signup-image">
-          <input type="text" name="friend" id="choose" placeholder="Choose your friends"/>
-          <div class="form-group form-button">
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!--            <div>-->
+<!--            <label><b>Choose your friends</b></label>-->
+<!--            <input type="text" name="message" id="user_input">-->
+<!--            </div>-->
+<!--            <input type="reset" onclick="showInput();" value="add to list"><br/>-->
 
-</div>
-</div>
-</div>
-</section>
+<!--            <div class="form-group">-->
+<!--              <label for="img"></label>-->
+<!--              <input type="image" name="image" id="image" placeholder="Upload menu image"/>-->
+<!--            </div>-->
 
-</div>
+<!--            how to uploads img-->
+<!--            <div class="custom-file row">-->
+<!--              <div class="col-sm-10">-->
+<!--                <label class="custom-file-label" for="validatedCustomFile">Choose Menu Image file...</label>-->
+<!--              </div>-->
 
-</body>
-</html>
+<!--              <br><br><br>-->
+<!--            <div class="form-group form-button">-->
+<!--              <input type="submit" value="Publish" width="50"/>-->
+<!--            </div>-->
+          <%#end%>
+
+<!--        </div>-->
+<!--        <br><br><br><br>-->
+<!--        <div class="signup-image">-->
+
+<!--          <input type="text" name="friend" id="choose" placeholder="Choose your friends"/>-->
+<!--          <div class="form-group form-button">-->
+<!--            <label>Your friends: </label>-->
+<!--            <p><span id='display'></span></p>-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</section>-->
+
+
+<%#= form_for [@user,@order] do |f| %>
+<!--  <div class="alert alert-success center" role="alert">-->
+
+<!--    <div class="form-group row">-->
+<!--      <div class="col-sm-10">-->
+<!--        <select class="form-control friend-head-add" id="order_name" name="order[name]">-->
+<!--          <option selected>Choose Your Meal</option>-->
+<!--          <option value="breakfast">Breakfast</option>-->
+<!--          <option value="lunch">Lunch</option>-->
+<!--          <option value="dinner">Dinner</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="form-group row">-->
+<!--      <div class="col-sm-10">-->
+<%#= f.text_field :resturant, {:class => 'form-control friend-head-add', :placeholder => "Enter Restaurant"} %>
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="form-group row">-->
+<!--      <div class="col-sm-10">-->
+<%#= f.text_field :user_name, data: {autocomplete_source: users_path}, :class => "form-control friend-head-add", :placeholder => "Search for Friends to invite"%>
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="field">-->
+<!--      <ul id="added">-->
+
+<!--      </ul>-->
+<!--    </div>-->
+<!--    <div class="custom-file row">-->
+<!--      <div class="col-sm-10">-->
+<!--        <label class="custom-file-label" for="validatedCustomFile">Choose Menu Image file...</label>-->
+<!--      </div>-->
+<!--      <div class="col-sm-10">-->
+<%#= f.file_field :avatar , {:class => 'custom-file-input form-control friend-head-add'}%>
+<!--      </div>-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <div class="action row">-->
+<!--      <div class="col-sm-10">-->
+<!--        <div class="form-group form-button">-->
+<!--          <input type="submit" value="Publish" width="50"/>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<%# end %>
+<%#= link_to 'Back', orders_path %>
+
+
+
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+
+

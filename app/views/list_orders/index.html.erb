@@ -1,78 +1,95 @@
+<!--ssss-->
+<!--<head>-->
 
-<head>
+<!--  <link rel="stylesheet" type="text/css" href="/css/list_orders.css">-->
 
-  <link rel="stylesheet" type="text/css" href="/css/list_orders.css">
+<!--</head>-->
+<!--<body>-->
 
-</head>
-<body>
-
-<div class="limiter">
-  <div class="container-table100">
-    <div class="wrap-table100">
-      <div class="table100">
-        <h2>Orders</h2>
-       <div align="right" class="black" > <h2><a href="<%= orders_add_path %>">Start new order</a> </h2></div>
-        <table>
-          <thead>
-          <tr class="table100-head">
-            <th class="column1">Order</th>
-            <th class="column2">Resturant</th>
-            <th class="column3">Invited</th>
-            <th class="column4">Joined</th>
-            <th class="column5">Status</th>
-            <th class="column6">Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td class="column1">2017-09-29 01:22</td>
-            <td class="column2">200398</td>
-            <td class="column3">iPhone X 64Gb Grey</td>
-            <td class="column4">$999.00</td>
-            <td class="column5">1</td>
-            <td class="column6">$999.00</td>
-          </tr>
-          <tr>
-            <td class="column1">2017-09-28 05:57</td>
-            <td class="column2">200397</td>
-            <td class="column3">Samsung S8 Black</td>
-            <td class="column4">$756.00</td>
-            <td class="column5">1</td>
-            <td class="column6">$756.00</td>
-          </tr>
-          <tr>
-            <td class="column1">2017-09-26 05:57</td>
-            <td class="column2">200396</td>
-            <td class="column3">Game Console Controller</td>
-            <td class="column4">$22.00</td>
-            <td class="column5">2</td>
-            <td class="column6">$44.00</td>
-          </tr>
-          <tr>
-            <td class="column1">2017-09-25 23:06</td>
-            <td class="column2">200392</td>
-            <td class="column3">USB 3.0 Cable</td>
-            <td class="column4">$10.00</td>
-            <td class="column5">3</td>
-            <td class="column6">$30.00</td>
-          </tr>
-          <tr>
-            <td class="column1">2017-09-24 05:57</td>
-            <td class="column2">200391</td>
-            <td class="column3">Smartwatch 4.0 LTE Wifi</td>
-            <td class="column4">$199.00</td>
-            <td class="column5">6</td>
-            <td class="column6">$1494.00</td>
-          </tr>
+<!--<div class="limiter">-->
+<!--  <div class="container-table100">-->
+<!--    <div class="wrap-table100">-->
+<!--      <div class="table100">-->
+<!--        <h2>Orders</h2>-->
+<!--       <div align="right" class="black" > <h2><a href="<%#= orders_add_path %>">Start new order</a> </h2></div>-->
+<!--        <table>-->
+<!--          <thead>-->
+<!--          <tr class="table100-head">-->
+<!--            <th class="column1">Order</th>-->
+<!--            <th class="column2">Resturant</th>-->
+<!--            <th class="column3">Invited</th>-->
+<!--            <th class="column4">Joined</th>-->
+<!--            <th class="column5">Status</th>-->
+<!--            <th class="column6">Action</th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--          <tr>-->
+<!--            <td class="column1">2017-09-29 01:22</td>-->
+<!--            <td class="column2">200398</td>-->
+<!--            <td class="column3">iPhone X 64Gb Grey</td>-->
+<!--            <td class="column4">$999.00</td>-->
+<!--            <td class="column5">1</td>-->
+<!--            <td class="column6">$999.00</td>-->
+<!--          </tr>-->
 
 
-          </tbody>
-        </table>
-      </div>
-    </div>
+<!--          </tbody>-->
+<!--        </table>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+<!--</body>-->
+
+
+
+
+<div class="text-center">
+  <div class="alert alert-success" role="alert">
+    <h1 class="alert-heading">Orders</h1>
   </div>
 </div>
 
+<table class="table table-bordered table-hover table-responsive">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Order</th>
+    <th scope="col">Restaurant</th>
+    <th scope="col">Status</th>
+    <th scope="col" colspan="3">Actions</th>
+  </tr>
+  </thead>
+
+    <tbody>
+  <% i=1 %>
+  <% if @orders %>
+  <% @orders.each do |order| %>
+        <tr>
+          <th scope="row"><%= i %></th>
+          <td><%= order.name %></td>
+          <td><%= order.restaurant %></td>
+          <td><%= order.status %></td>
+          <td><%= link_to 'View', user_order_path(order.user,order.id), class: "btn btn-primary" %></td>
+
+        </tr>
+  <% i = i + 1 %>
+  <% end %>
+  <% end %>
+    </tbody>
+</table>
+
+<!--<br>-->
+
+<%#= link_to 'New Order', new_user_order_path(@user), class: "btn btn-primary" %>
+
+<%#= image_tag ( "rand_front/#{@random_image}", style='height:50vw;width:100vw;margin-bottom:20px;') %>
 
 
-</body>
+
+
+

@@ -1,0 +1,39 @@
+
+
+<div class="text-center">
+  <div class="alert alert-success" role="alert">
+    <h1 class="alert-heading">Orders</h1>
+  </div>
+</div>
+
+<table class="table table-bordered table-hover table-responsive">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Order</th>
+    <th scope="col">Restaurant</th>
+    <th scope="col">Status</th>
+    <th scope="col" colspan="3">Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if @orders %>
+    <% @orders.each do |order| %>
+      <tr>
+
+        <td><%= order.id %></td>
+        <td><%= order.kind %></td>
+        <td><%= order.resturant %></td>
+        <td><%= order.status %></td>
+        <td><%= link_to 'Back', orders_path %>
+            <%= link_to 'Cancel', orders_path(order.user,order.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Finish', orders_path %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+
+

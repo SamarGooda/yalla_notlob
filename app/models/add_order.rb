@@ -1,3 +1,0 @@
-class AddOrder < ApplicationRecord
-
-end

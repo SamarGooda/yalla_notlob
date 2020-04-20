@@ -1,19 +1,81 @@
 class AddOrdersController < ApplicationController
+  $list = []
+
   def index
     @order = Order.new
-    # redirect_to '/home'
+    @member_list = $list
   end
 
   def add
 
-    @order = Order.create(params.require(:order).permit(:kind, :resturant ,:user ,:status))
-    redirect_to '/orders'
-    # @order = Order.new
-    # @order.type= params[:type]
-    # @order.resturant=params[:resturant]
-    # # @order.status=params[:status]
-    # @order.save
-    p "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+    if params[:commit] == 'Add'
+      @parameter = params[:search]
+      @user = User.where(email: @parameter).first
+      if @user
+        # for i in $list do
+        #   p(i)
+        #   p(@parameter)
+        #   if i == @parameter
+        #     p(i)
+        #     p(@parameter)
+        #   else
+        #     p(i)
+        #     p(@parameter)
+        #     $list.append(@parameter)
+        #   end
+        # end
+        $list.append(@parameter)
+        @order = Order.new
+        @order.kind = params.require(:order)[:kind]
+        @order.resturant = params.require(:order)[:resturant]
+        @order.status = params.require(:order)[:status]
+        @order.image = params.require(:order)[:img]
+        @member_list = $list
+        render :index
+      else
+        @order = Order.new
+        @order.kind = params.require(:order)[:kind]
+        @order.resturant = params.require(:order)[:resturant]
+        @order.status = params.require(:order)[:status]
+        @order.image = params.require(:order)[:img]
+        @member_list = $list
+        render :index
+      end
+
+    elsif params[:commit] == 'Publish'
+      @order = Order.new
+      @order.kind = params.require(:order)[:kind]
+      @order.resturant = params.require(:order)[:resturant]
+      @order.status = params.require(:order)[:status]
+      @order.image = params.require(:order)[:img]
+
+      @order.user_id = current_user.id
+      @order.status = "waiting"
+      # @order.img=params.require (:order)[menu: uploaded_io.original_filename]
+      # @order.menu = params.require(:order)[:menu].original_filename
+
+      @order.save
+      #loop list f friends
+       @friend = OrderFriend.new
+              @friend.orders_id = @order.id
+              @friend.user_id = current_user.id
+              @friend.status = "invite"
+      @friend.save()
+      redirect_to '/orders'
+      uploaded_io = params.require(:order)[:menu]
+    end
   end
 
-end
+
+
+    def list
+      @orders = Order.all()
+    end
+
+
+    def search
+
+    end
+
+  end
+

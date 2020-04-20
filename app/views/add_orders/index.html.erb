@@ -1,3 +1,148 @@
-<%= render 'form', order: @order %>
+<%#= render 'form', order: @order %>
 
-<%= link_to 'Back', orders_path %>
+
+<%#= form_for [@user,@order] do |f| %>
+<head>
+  <link rel="stylesheet" href="/css/add_orders.css">
+  <script language="JavaScript">
+      function showInput() {
+
+          document.getElementById('display').innerHTML += " " + document.getElementById("user_input").value;
+
+      }
+  </script>
+</head>
+<body>
+<div class="main">
+
+  <!-- Sign up form -->
+  <section class="signup">
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-form">
+          <%= form_for(@order, url: "/add") do |f| %>
+
+            <%#= form_tag({:controller=>'company_infos', :action=>"buy"}, method: :get) do %>
+
+            <div class="alert alert-success center" role="alert">
+
+              <div class="form-group row">
+                <div class="col-sm-10">
+
+
+                  <%= f.select(:kind, ['Breakfast', 'Lunch', 'Dinner'], value: @order.kind, class: 'select') %>
+
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <%= f.text_field :resturant, {:class => 'form-control friend-head-add', value: @order.resturant, :placeholder => "Enter Restaurant", :style => 'width: 350px'} %>
+                </div>
+              </div>
+
+              <div class="field">
+                <ul id="added">
+
+                </ul>
+              </div>
+
+              <div class="custom-file">
+
+                <%= f.label :img do %>
+                  <%= f.file_field :img, value: @order.image %>
+                <% end %>
+              </div>
+              <br>
+
+              <%#= form_tag(search_page_path, class: 'navbar-form navbar-left') do %>
+              <!--      <div class="input-group">-->
+              <%#= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" ,:style => 'width: 350px'%>
+              <%#= submit_tag "Add" ,name:"/search", width:"100px" %>
+              <%#= submit_tag("Add", { :name => '/search', :id => 'reset_button', :type => "reset" }) %>
+              <!--        <div class="input-group-btn">-->
+
+
+              <!--        </div>-->
+              <!--      </div>-->
+              <%# end %>
+              <!--                  how to search for your friends-->
+              <!--            <div class="form-group row">-->
+              <!--              <div class="col-sm-10">-->
+              <%#= f.text_field :user_name, data: {autocomplete_source: users_path}, :class => "form-control friend-head-add", :placeholder => "Search for Friends to invite"%>
+              <!--              </div>-->
+              <!--            </div>-->
+              <!--            <div class="field">-->
+              <!--              <ul id="added">-->
+
+              <!--              </ul>-->
+
+              <%#= form_tag(@order, url: "/search") do |f| %>
+              <%#= form_tag search_path, method: "post" do %>
+              <div>
+                <label><b>Choose your friends</b></label>
+                <input type="text" name="search" id="user_input">
+              </div>
+              <!--                <input type="submit" value="add to list"><br/>-->
+              <br/>
+              <%= f.submit 'Add' %>
+              <br><br><br>
+
+
+              <div class="action row">
+                <div class="col-sm-10">
+                  <div class="form-group form-button">
+                    <!--                    <input type="submit" value="Publish" width="50"/>-->
+                    <%= f.submit 'Publish' %>
+                  </div>
+                </div>
+              </div>
+
+          <% end %>
+
+
+          <%= link_to 'Back', orders_path %>
+
+
+          </div>
+
+        </div>
+
+
+        <!--        <div class="signup-image" >-->
+        <%# if @all_friends %>
+        <%# @all_friends.each do |friend| %>
+        <!--              <div class="card" style="width: 18rem;">-->
+
+        <!--                <div class="card-body">-->
+        <!--                  <h5 class="card-title"> <%#= friend.fname %>  <%#= friend.lname %></h5>-->
+
+        <!--                  <a href="#" class="btn btn-primary">Remove</a>-->
+        <!--                </div>-->
+        <!--              </div>-->
+
+
+
+        <%# end %>
+        <%# end %>
+        <div class="signup-image">
+
+          <div class="form-group form-button">
+            <label>Your friends: </label>
+            <p><span id='display'>
+
+               <% @member_list.each do |user| %>
+                    <tr> <td><%= user %></td> </tr>
+              <% end %>
+
+            </span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--    </div>-->
+  </section>
+</div>
+</body>
+

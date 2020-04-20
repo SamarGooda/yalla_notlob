@@ -50,11 +50,11 @@ ActiveRecord::Schema.define(version: 2020_04_19_084119) do
 
   create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "orders_id"
-    t.string "quantity"
+    t.integer "quantity"
     t.string "item"
-    t.integer "price"
+    t.decimal "price", precision: 10
     t.string "status"
-    t.string "comment"
+    t.text "comment"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_084119) do
     t.string "kind"
     t.string "resturant"
     t.string "status"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
