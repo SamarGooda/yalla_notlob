@@ -7,11 +7,16 @@
  <% end %>
 <h3>your groups</h3>  
 
+<% if @groups %>
     <% @groups.each do |group| %>  
      <h3>   <%= group.name %></h3>
     <a href="<%= edit_group_path(group) %>" class="btn btn-primary">add friend</a>
     <%= link_to  "delete", group, method: :DELETE	 ,class:"btn btn-danger" %>
     <% end %>
+  
+<% elsif @notfound %>
+  <div class="alert alert-info" role="alert"> <%= @notfound %></div>
+<% end %>
 
 
 

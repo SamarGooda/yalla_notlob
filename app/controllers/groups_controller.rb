@@ -2,6 +2,11 @@ class GroupsController < ApplicationController
 
         def index
             @groups=Group.all
+            if @groups.blank? 
+              @notfound= "you don't create any group yet"
+          else
+              @groups
+          end
           end
         
     

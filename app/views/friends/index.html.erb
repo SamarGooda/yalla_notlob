@@ -1,3 +1,10 @@
+<% if @notfound %>
+<div class="alert alert-warning" role="alert">
+     <%= @notfound %>
+</div>
+
+<% end %>
+
 <%= form_tag(search_page_path, :method => "get",   
     class: 'navbar-form navbar-left') do %>  
   <div class="input-group">  
@@ -15,7 +22,7 @@
    <div class="card" style="width: 18rem;">
 
  <div class="card-body">
-                 <h5 class="card-title"> <%= friend.Fname %>  <%= friend.Lname %></h5>
+                 <h5 class="card-title"> <%= friend.fname %>  <%= friend.lname %></h5>
 
                         <a href="#" class="btn btn-primary">unfriend</a>
                           </div>
@@ -23,3 +30,5 @@
     <% end %>
 
 <% end %>
+
+
