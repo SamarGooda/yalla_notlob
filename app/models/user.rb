@@ -12,6 +12,6 @@ class User < ApplicationRecord
     # validates :fname, presence: true
     # validates :lname, presence: true
 
-    has_many :notifications
+    has_many :notifications 
     has_many :friends
 end

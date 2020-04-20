@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   resources :friends
   resources :groups
-  
+  resources :notifications do
+    collection do
+      post :mark_as_reads
+    end  
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

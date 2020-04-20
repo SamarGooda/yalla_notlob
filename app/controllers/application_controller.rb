@@ -3,6 +3,12 @@ class ApplicationController < ActionController::Base
     before_action :authorized
     helper_method :current_user
     helper_method :logged_in?
+    # before_action :set_notifications
+
+
+    # def set_notifications    
+    #     @notifications = Notification.where(user: current_user).unread
+    # end 
 
 
     def current_user
@@ -16,7 +22,6 @@ class ApplicationController < ActionController::Base
     
     def authorized
         redirect_to '/' unless logged_in?
-    end
-
+    end   
 
 end
