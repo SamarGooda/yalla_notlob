@@ -1,14 +1,33 @@
-<% if @user %>
-   <div class="alert alert-success" role="alert">
 
-       you are now friends
-   </div>
-<% else %>
-<div class="alert alert-warning" role="alert">
-  No user with this email
+
+
+<% if @emptyemail %>
+   <div class="alert alert-warning" role="alert">
+     <%= @emptyemail %>
 </div>
+<% end %>
+
+
+<% if @user %>
+         
+   <% if @repeatuser %>
+      <div class="alert alert-warning" role="alert">you are already friends</div>
+   <% else %>
+   <div class="alert alert-success" role="alert">you are now friends</div>
+   <% end %>
+
+<% else %>
+   <% if  @addyourself %>
+   <div class="alert alert-warning" role="alert"><%=  @addyourself %></div>
+    <% else %>
+   <div class="alert alert-danger" role="alert">No user with this email</div>
+    <% end %>
 
 <% end %>
+
+
+
+
 
 
     

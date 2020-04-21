@@ -2,42 +2,71 @@ class FriendsController < ApplicationController
 
    def index
     @all_friends = User.joins("INNER JOIN friends ON friends.friend_id = users.id")
-
+    if @all_friends.blank? 
+        @notfound= "You have not any friends yet, enter email of the person you would like to add"
+    else
+        @all_friends
+    end
   end
 
-  # def  show
-  # end
-   
+
 
    def search   
+      @useremail= current_user.email
       @parameter = params[:search] 
-      @user = User.where(" email LIKE :search", search: @parameter).first
-      userid=1
-    if @user
-      @friend=Friend.new
-      @friend.friend_id=@user.id
-      @friend.user_id=userid
-      @friend.status="true"
-      @friend.save()
-    end
+      if @parameter.blank? 
+        @error= "you entered empty email"
 
-    @all_friends = User.joins("INNER JOIN friends ON friends.friend_id = users.id")
+      elsif @parameter == @useremail
+        @error=  "you can't add yourself"
+      else
+        @user = User.where(" email LIKE :search", search: @parameter).first
+      
+        if @user
+          @friend = Friend.find_by(friend_id: @user.id)
+        else
+          @error= 'User not found'
+        end
+      
+        if @friend
+          @error = "you are already friends"
+        else
+          userid= current_user.id
+          if @user
+            @friend=Friend.new
+            @friend.friend_id=@user.id
+            @friend.user_id=userid
+            @friend.status="true"
+            @friend.save()
+          end
+        end
 
+
+      end
+
+      if @error.blank?
+          @error=  'you are now friends'
+      end  
+
+      redirect_to '/friends', notice: @error
+  
+  
   end
- 
 
 
-  def list_activities
-    @my_friends = ActiveRecord::Base.connection.execute("SELECT * FROM friends WHERE  user_id = #{current_user.id}")
-    if @my_friends
-      @my_friends.each do |friend|
-        p("friend is ", friend[5])
-        @each_friend_detail = ActiveRecord::Base.connection.execute("SELECT * FROM users WHERE  id = #{friend[5]}")
-        @each_friend_order = ActiveRecord::Base.connection.execute("SELECT * FROM orders WHERE  user_id = #{friend[5]}")
+  def destroy
+    @id=params[:id]
+    p @id
+    @friend = Friend.find_by(friend_id: @id)
 
-    end
+    @friend.destroy
+    redirect_to '/friends', notice: 'Friend deleted successfully.' 
   end
-end
+
+
+
+
+
 
 
 end
