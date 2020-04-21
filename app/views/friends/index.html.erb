@@ -22,9 +22,8 @@
    <div class="card" style="width: 18rem;">
 
  <div class="card-body">
-                 <h5 class="card-title"> <%=  friend.fname %>  <%= friend.lname %></h5>
 
-
+                 <h5 class="card-title"> <%= friend.fname %>  <%= friend.lname %></h5>
              <%= link_to "unfriend" , friend_path(friend.id) , method: :DELETE,class:"btn btn-danger"	%>
 
     
@@ -32,5 +31,3 @@
     <% end %>
 
 <% end %>
-
-
