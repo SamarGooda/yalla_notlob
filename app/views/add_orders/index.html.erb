@@ -4,13 +4,14 @@
 <%#= form_for [@user,@order] do |f| %>
 <head>
   <link rel="stylesheet" href="/css/add_orders.css">
-  <script language="JavaScript">
-      function showInput() {
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!--  <script language="JavaScript">-->
+<!--      function showInput() {-->
 
-          document.getElementById('display').innerHTML += " " + document.getElementById("user_input").value;
+<!--          document.getElementById('display').innerHTML += " " + document.getElementById("user_input").value;-->
 
-      }
-  </script>
+<!--      }-->
+<!--  </script>-->
 </head>
 <body>
 <div class="main">
@@ -133,7 +134,10 @@
             <p><span id='display'>
 
                <% @member_list.each do |user| %>
-                <tr> <td><%= user %>  <%= link_to "Delete", "/delete_friend" %><br> <br></td></tr>
+                <tr> <td><%= user %>
+                  <%#= link_to "Delete", "/delete_friend" ,class:"delete" %>
+                  <a href="#" class="delete" data-id="<%= user %>">delete</a>
+                  <br> <br></td></tr>
 
               <% end %>
 
@@ -146,5 +150,19 @@
     <!--    </div>-->
   </section>
 </div>
+<script>
+
+    // const btn =document.getElementsByClassName("delete")
+    $(document).on('click' ,'.delete',function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        alert(id);
+        axios.post('/orders/delete',{id}).then(res => member_list = list) ;
+    });
+
+
+
+</script>
+
 </body>
 

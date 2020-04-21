@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get '/home' => 'home#index'
   get '/orders/add' => 'add_orders#index'
   get '/orders' => 'add_orders#list'
-  # get '/orders' => 'list_orders#index'
+  post '/orders/delete/:id' =>  'add_orders#delete'
+
   post '/add' => 'add_orders#add'
   post '/cancel/:id' => 'add_orders#cancel'
   post '/finish/:id' => 'add_orders#finish'

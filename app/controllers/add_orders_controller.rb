@@ -2,7 +2,6 @@ class AddOrdersController < ApplicationController
   $list = []
 
   def index
-
     @order = Order.new
     @member_list = $list
   end
@@ -102,6 +101,15 @@ class AddOrdersController < ApplicationController
 
 
     end
+
+  def delete
+    p("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+    p(params)
+    for i in $list
+       i == params.id
+       $list -= [i]
+    end
+  end
 
   end
 
