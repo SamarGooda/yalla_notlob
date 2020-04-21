@@ -1,0 +1,40 @@
+
+<% if @notfound %>
+  <div class="alert alert-info" role="alert"> <%= @notfound %></div>
+<% end %>
+
+
+<% if @notfriend %>
+  <div class="alert alert-info" role="alert"> <%= @notfriend %></div>
+
+<% else %>
+  <div class="alert alert-info" role="alert"> your friend is added to the group</div>
+
+<% end %>
+
+<%= form_tag(group_path	, :method => "patch", class: 'navbar-form navbar-left') do %>  
+  <div class="input-group">  
+    <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>  
+    <div class="input-group-btn">  
+        <%= submit_tag("Add",class:"btn btn-success  btn-block") %>
+  
+    </div>  
+  </div>  
+<% end %>
+
+
+<% if @all %>
+   <% @all.each do |friend| %>  
+   <div class="card" style="width: 18rem;">
+
+ <div class="card-body">
+                 <h5 class="card-title"> <%= friend.Fname %>  <%= friend.Lname %></h5>
+
+                        <a href="#" class="btn btn-primary">add</a>
+                          </div>
+</div>
+    <% end %>
+
+<% end %>
+
+

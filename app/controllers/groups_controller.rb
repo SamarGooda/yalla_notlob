@@ -1,13 +1,13 @@
 class GroupsController < ApplicationController
 
-        def index
+      def index
             @groups=Group.all
             if @groups.blank? 
               @notfound= "you don't create any group yet"
-          else
+            else
               @groups
-          end
-          end
+            end
+      end
         
     
 
@@ -15,31 +15,36 @@ class GroupsController < ApplicationController
     def  create
         @group=Group.new
         @group.name=params[:name]
+        @group.user_id = 1
+
         @group.save()
         redirect_to action:  :index
       end
 
 
       def update
-        @all_friends = User.joins("INNER JOIN friends ON friends.friend_id = users.id")
-
+        @all = User.joins("INNER JOIN friends ON friends.friend_id = users.id")
+        if @all.blank? 
+            @notfound= "You have not any friends yet, enter email of the person you would like to add"
+        else
+           p @all
+        end
         @parameter = params[:search] 
         @user = User.where("email LIKE :search", search: @parameter)
-        # p @user.ids
         @friend = Friend.where(friend_id: @user.ids ).where(user_id: 1)
-
-        p "iiiiiiiiiiiii"
-
         p @friend.ids[0]
-        p "iiiiiiiiiiiiiiiiiiiiii"
+         if @friend.blank? 
+          @notfriend = "your are not friends"
 
-        @group =Groupfriend.new
-        @group.friend_id =@friend.ids[0]
-        @groupid=params[:id]
-        @group.group_id = @groupid
-        # p @group.group_id
+         else
+          @group =Groupfriend.new
+          @group.friend_id =@friend.ids[0]
+          @groupid=params[:id]
+          @group.group_id = @groupid
+          @group.save()
+         end
 
-        @group.save()
+
       end
 
       def  destroy
@@ -48,6 +53,5 @@ class GroupsController < ApplicationController
         @deleteGroup = Group.find(@groupid)
         @group.destroy_all
         @deleteGroup.destroy
-        redirect_to action:  :index
       end
 end
