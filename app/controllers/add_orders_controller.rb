@@ -2,6 +2,7 @@ class AddOrdersController < ApplicationController
   $list = []
 
   def index
+
     @order = Order.new
     @member_list = $list
   end
@@ -59,7 +60,6 @@ class AddOrdersController < ApplicationController
       @order.status = "waiting"
       # @order.img=params.require (:order)[menu: uploaded_io.original_filename]
       # @order.menu = params.require(:order)[:menu].original_filename
-
       @order.save
       #loop list f friends
        @friend = OrderFriend.new
@@ -79,8 +79,19 @@ class AddOrdersController < ApplicationController
     end
 
 
+  def cancel
+    p("gggggggggggggggggggggggggggggggggggggggggggg")
+    p(params)
+    @order = Order.find(params[:id])
+    @order.status="cancel"
+    @order.save()
+    redirect_to '/orders'
+  end
+
+
     def delete
       @order = Order.find(params[:id])
+
       @order.destroy()
       redirect_to '/orders'
 

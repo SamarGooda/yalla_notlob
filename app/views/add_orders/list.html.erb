@@ -26,8 +26,10 @@
         <td><%= order.kind %></td>
         <td><%= order.resturant %></td>
         <td><%= order.status %></td>
-        <td><%= link_to 'Back', orders_path %>
-            <%= link_to 'Cancel', delete_path(order.user,order.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <td><%= link_to 'View', orders_path %>
+
+            <%= link_to 'cancel', "/cancel/"+order.id.to_s, method: :post, data: { confirm: 'Are you sure?' } %>
+
             <%= link_to 'Finish', orders_path %></td>
       </tr>
     <% end %>

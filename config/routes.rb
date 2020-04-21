@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   get '/orders' => 'add_orders#list'
   # get '/orders' => 'list_orders#index'
   post '/add' => 'add_orders#add'
-  post '/delete' => 'add_orders#delete'
-
+  post '/cancel/:id' => 'add_orders#cancel'
   get '/friends/search' => 'friends#search', :as => 'search_page'
 
   resources :friends

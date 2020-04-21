@@ -133,7 +133,8 @@
             <p><span id='display'>
 
                <% @member_list.each do |user| %>
-                    <tr> <td><%= user %></td> </tr>
+                <tr> <td><%= user %>  <%= link_to "Delete", "/delete_friend" %><br> <br></td></tr>
+
               <% end %>
 
             </span></p>
