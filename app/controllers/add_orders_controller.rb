@@ -89,11 +89,16 @@ class AddOrdersController < ApplicationController
   end
 
 
-    def delete
+    def finish
+      p(params)
       @order = Order.find(params[:id])
-
-      @order.destroy()
+      @order.status="finish"
+      @order.save()
       redirect_to '/orders'
+      # @order = Order.find(params[:id])
+      #
+      # @order.destroy()
+      # redirect_to '/orders'
 
 
     end

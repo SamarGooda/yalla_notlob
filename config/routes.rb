@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # get '/orders' => 'list_orders#index'
   post '/add' => 'add_orders#add'
   post '/cancel/:id' => 'add_orders#cancel'
+  post '/finish/:id' => 'add_orders#finish'
   get '/friends/search' => 'friends#search', :as => 'search_page'
 
   resources :friends
