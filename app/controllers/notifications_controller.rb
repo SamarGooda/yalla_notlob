@@ -4,7 +4,7 @@ class  NotificationsController < ApplicationController
     # before_action :authenticate_user!
     def index
         # @notifications = Notification.where(user: current_user).unread
-        @notifications = Notification.where(user: current_user)
+        @notifications = Notification.where(user: current_user).order('created_at DESC')
     end
     # "user" is the recipient of the notification
     skip_before_action :verify_authenticity_token

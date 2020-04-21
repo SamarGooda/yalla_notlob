@@ -1,0 +1,46 @@
+<div class="text-center">
+  <div class="alert alert-success" role="alert">
+    <h1 class="alert-heading">Order Details</h1>
+  </div>
+</div>
+<table class="table table-bordered table-hover table-responsive">
+  <thead>
+  <tr>
+    <th scope="col">Person</th>
+    <th scope="col">Items</th>
+    <th scope="col" style="width:300px;">Amount</th>
+    <th scope="col">Price</th>
+    <th scope="col">Comment</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if @all_orders %>
+    <% @all_orders.each do |order| %>
+      <tr>
+        <td><%= @user.fname %></td>
+        <td><%= order[2]%></td> 
+        <td><%= order[1]%></td> 
+        <td><%= order[3]%></td> 
+        <td><%= order[5]%></td> 
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+ <%# :url => url_for(:controller => 'mycontroller', :action => 'myaction' %>
+
+<%= form_with method: "post", :url => url_for(:controller => 'add_orders', :action => 'save_items') do |f| %>
+<div class="input-group">
+<div class="input-group-prepend">
+<%= text_field_tag (:item), nil, placeholder: "Item", class: "form-control", style:'width:300px; position:relative; left:20px;' %>
+<%= text_field_tag "quantity", nil, placeholder: "Quantity", class: "form-control",type: "number",min: "1",step: "any" , style: 'position:relative; left:50px;width:125px'%>
+<%= text_field_tag "price" ,nil, placeholder: "Price", class: "form-control", type: "number",min: "1",step: "any" , style: 'position:relative; left:80px;width:125px'%>
+<%= text_field_tag "comment" ,nil, placeholder: "Comment", class: "form-control", style:'width:300px; position:relative; left:150px;' %>
+<%= f.submit "Add" ,class: "btn btn-info", style: "position:relative; left:350px; width:120px; height:54px" %>
+
+</div>
+</div>
+
+<% end %>
+

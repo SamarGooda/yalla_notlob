@@ -66,6 +66,47 @@ class AddOrdersController < ApplicationController
     end
   end
 
+  def order_details
+        @order_object = Order.find(params[:id])
+        @order_id = @order_object.id
+        @user = User.find(@order_object.user_id)
+        @all_orders = ActiveRecord::Base.connection.execute("SELECT * FROM order_items WHERE  order_id = #{@order_id}")
+    end
+  
+
+  def save_items
+    @order_object = Order.find(params[:id])
+    @order_id = @order_object.id
+    @user = User.find(@order_object.user_id)
+    @order = OrderItem.new
+    @order.order_id = @order_id 
+    @order.item = params[:item]
+    @order.quantity = params[:quantity]
+    @order.price = params[:price] 
+    @order.comment = params[:comment]
+    @order.status = "waiting"
+    @order.user_id = current_user.id
+    flash.alert = "User not found."
+    valid = validate_items(@order.item, @order.quantity, @order.price, @order.comment)
+    if valid == true
+        @order.save
+        @all_orders = ActiveRecord::Base.connection.execute("SELECT * FROM order_items WHERE  order_id = #{@order_id}")
+    
+    end
+    redirect_to action: :order_details
+  end
+
+  def validate_items(order_item, order_quantity, order_price, order_comment)
+    valid = true
+    if !order_item || !order_quantity || !order_price
+        flash.alert = "Order Details(Items, Quantity, Price) are Required"
+        valid = false
+    else
+        flash.alert = "Done"
+        valid = true
+    end
+    return valid
+  end
 
 
     def list
@@ -76,6 +117,10 @@ class AddOrdersController < ApplicationController
     def search
 
     end
+
+
+   
+
 
   end
 
