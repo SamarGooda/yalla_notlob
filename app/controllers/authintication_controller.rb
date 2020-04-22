@@ -1,9 +1,14 @@
 class AuthinticationController < ApplicationController
         
     skip_before_action :authorized
+
     def index
-        @user = User.new
-        render :layout => false
+        if logged_in?
+            redirect_to '/home' 
+        else
+            @user = User.new
+            render :layout => false
+        end
     end  
     
     def register
@@ -14,12 +19,16 @@ class AuthinticationController < ApplicationController
     
     def login
         @user = User.find_by(email: params[:email])
-        p '1111111111111111111111111111111111111111111111111111111111111'
         if @user && @user.authenticate(params[:password])
            session[:user_id] = @user.id
            redirect_to '/home'
         else
-           redirect_to '/'
+           redirect_to '/', notice: "Wrong credentials, try again!"
         end
+    end   
+    
+    def logout
+        session.delete(:user_id)
+        redirect_to '/', notice: "You are loged out!"
     end    
 end

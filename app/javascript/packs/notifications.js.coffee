@@ -43,7 +43,6 @@ class Notifications
 
     handleSuccess: (data) =>
         # console.log(data)
-        console.log("mohamedeeeeeeeeeee")
         items = $.map data, (notification) ->
             "<div class='dropdown-item' style='font-size: 15px;line-height: 1.6; border-bottom: 0.5px solid grey;'>#{notification.action}</div>" 
         console.log(data.length)

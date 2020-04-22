@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   post 'register', to: 'authintication#register'
   post 'login', to: 'authintication#login'
+  get 'logout', to: 'authintication#logout'
   root :to => "authintication#index"
   get '/home' => 'home#index'
   get '/orders/add' => 'add_orders#index'

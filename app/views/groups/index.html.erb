@@ -6,6 +6,7 @@
 <% if @notfound %>
   <div class="alert alert-info" role="alert"> <%= @notfound %></div>
 <% end %>
+<a class="nav-link btn btn-success" href="<%= new_group_path %>">New group </a>
 <% if @groups %>
     <% @groups.each do |group| %>  
      <h3>   <%= group.name %></h3>

@@ -575,7 +575,7 @@
 		parallax();
 		burgerMenu();
 		scrolledWindow();
-		clickMenu();
+		// clickMenu();
 		navigationSection();
 		goToTop();
 

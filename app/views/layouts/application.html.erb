@@ -24,20 +24,19 @@
 			<div class="fh5co-main-nav">
 				<div class="container-fluid">
 					<div class="fh5co-menu-1">
-						<a href="/home" data-nav-section="home">Home</a>
-						<a href="#" data-nav-section="about">About</a>
-						<a class="nav-link" href="<%= new_group_path %>">groups </a>
-
-						<a href="#" data-nav-section="features">Features</a>
+					
+						<a  href="<%= friends_path %>">friends </a>
+						<a  href="<%= groups_path %>">groups </a>
+						<a  href="<%= orders_path %>">orders </a>
 					</div>
 					<div class="fh5co-logo">
-						<a href="index.html">foodee</a>
+						<a href="<%= home_path %>">YallaNotlob</a>
 					</div>
 					<div class="fh5co-menu-2">
-						<a href="#" data-nav-section="menu">Menu</a>
-						<a href="#" data-nav-section="events">Events</a>
-						
 					<% if logged_in?  %>
+						<a  href="<%= logout_path %>">logout </a>
+						
+					
 						<li class="nav-item btn-group" data-behavior = "notifications">
 							<a class="dropdown-toggle nav-link" type="button" id="dropdownMenu1" data-behavior="notifications-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="">
 								<%= fa_icon "bell" %><span data-behavior="unread-count"></span>
@@ -47,6 +46,8 @@
 							</div>
 							
 						</li>
+					<% else %>
+						<a  href="<%= root_path %>">login </a>
 					<% end %>
 					</div>
 				</div>
