@@ -54,4 +54,26 @@ class GroupsController < ApplicationController
         @group.destroy_all
         @deleteGroup.destroy
       end
+
+      def get_group_id
+         @groupid=params[:id]
+      end
+
+      def delete_friend
+        @groupid = get_group_id
+        p @groupid
+        @parameter = params[:name] 
+        p @parameter
+        @user = User.where("email LIKE :search", search: @parameter)
+        @friend = Friend.where(friend_id: @user.ids ).where(user_id: 1)
+        p @friend.ids[0]
+         if @friend.blank? 
+
+         else
+          @groupFriend=Groupfriend.where(group_id: @groupid ,friend_id: @friend.ids[0])
+          @groupFriend.destroy_all
+         end
+
+
+      end
 end

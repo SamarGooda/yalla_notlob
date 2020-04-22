@@ -1,0 +1,6 @@
+<%= form_tag( delete_friend_path, method: "delete") do %>
+  <div class="form-group">
+  <%= text_field_tag(:name, nil,placeholder: "Friend Name", class:"form-control") %>
+  </div>
+  <%= submit_tag("delete",class:"btn btn-danger") %>
+<% end %>
