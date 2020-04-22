@@ -121,7 +121,6 @@ class AddOrdersController < ApplicationController
 
 
   def cancel
-    p("gggggggggggggggggggggggggggggggggggggggggggg")
     p(params)
     @order = Order.find(params[:id])
     @order.status="cancel"
