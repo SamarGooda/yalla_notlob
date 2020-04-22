@@ -21,9 +21,8 @@
     <div class="container">
       <div class="signup-content">
         <div class="signup-form">
-          <%= form_for(@order, url: "/add") do |f| %>
+          <%= form_for(@order, method: "POST" ,url: "/add") do |f| %>
 
-            <%#= form_tag({:controller=>'company_infos', :action=>"buy"}, method: :get) do %>
 
             <div class="alert alert-success center" role="alert">
 
