@@ -18,6 +18,8 @@
   <% if @all_orders %>
     <% @all_orders.each do |order| %>
       <tr>
+        <%@user_id = order[6]%>
+        <%@user = User.find(@user_id)%>
         <td><%= @user.fname %></td>
         <td><%= order[2]%></td> 
         <td><%= order[1]%></td> 

@@ -69,15 +69,27 @@ class AddOrdersController < ApplicationController
   def order_details
         @order_object = Order.find(params[:id])
         @order_id = @order_object.id
-        @user = User.find(@order_object.user_id)
-        @all_orders = ActiveRecord::Base.connection.execute("SELECT * FROM order_items WHERE  order_id = #{@order_id}")
-    end
+        @all_orders = ActiveRecord::Base.connection.execute("SELECT * FROM order_items WHERE  order_id = #{@order_id}") #i have all items for specified order
+        if @all_orders
+          @all_orders.each do |order|
+            @user_id = order[6]
+            @user = User.find(@user_id)
+            puts(@user.id)
+          end
+        end
+        # @user = User.find(@all_orders.user_id) #this returns the user who created the order not the user who added items to order
+      end
   
 
   def save_items
     @order_object = Order.find(params[:id])
     @order_id = @order_object.id
-    @user = User.find(@order_object.user_id)
+    @user = User.find(current_user.id)
+    @user_status = OrderFriend.find(params[:id])
+    @user_status.status = "joined" 
+    @user_status.save
+
+
     @order = OrderItem.new
     @order.order_id = @order_id 
     @order.item = params[:item]
@@ -86,12 +98,12 @@ class AddOrdersController < ApplicationController
     @order.comment = params[:comment]
     @order.status = "waiting"
     @order.user_id = current_user.id
-    flash.alert = "User not found."
+    
     valid = validate_items(@order.item, @order.quantity, @order.price, @order.comment)
     if valid == true
         @order.save
         @all_orders = ActiveRecord::Base.connection.execute("SELECT * FROM order_items WHERE  order_id = #{@order_id}")
-    
+        
     end
     redirect_to action: :order_details
   end
@@ -117,9 +129,6 @@ class AddOrdersController < ApplicationController
     def search
 
     end
-
-
-   
 
 
   end
