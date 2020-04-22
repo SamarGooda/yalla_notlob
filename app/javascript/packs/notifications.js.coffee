@@ -5,15 +5,15 @@ class Notifications
         @setup() if @notifications.length > 0
     setup: ->
         $("[data-behavior='notifications-link']").on "click", @handleClick
-        setInterval () =>
-            $.ajax(
-                url: "/notifications.json"
-                dataType: "JSON"
+        # setInterval () =>
+        #     $.ajax(
+        #         url: "/notifications.json"
+        #         dataType: "JSON"
                 
-                method: "GET"
-                success: @handleSuccess
-            )
-        ,5000
+        #         method: "GET"
+        #         success: @handleSuccess
+        #     )
+        # ,5000
 
         $.ajax(
             url: "/notifications.json"
