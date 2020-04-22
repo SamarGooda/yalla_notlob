@@ -7,7 +7,7 @@ class AddOrdersController < ApplicationController
     @member_list = $list
     if params[:commit] == 'Add'
       @parameter = params[:search]
-      @user = User.where(email: @parameter).first
+      @user = User.where(email: @parameter).where.not(email: current_user.email).first
       # p(@parameter)
       if @user
           @invited_code = @user.id
