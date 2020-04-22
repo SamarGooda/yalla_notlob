@@ -63,9 +63,25 @@ class AddOrdersController < ApplicationController
               @friend.orders_id = @order.id
               @friend.user_id =  User.where(email: mail).first.id
               @friend.status = "invite"
-             @friend.save()
+              @friend.save()
+
+             @notification = Notification.new
+             @notification.user_id = User.where(email: mail).first.id      #the recipient
+             @notification.actor_id = current_user.id
+             @notification.action = "#{current_user.fname} Invited you to his order."
+             @notification.order_id = @order.id
+             @notification.save
+
+             @activity = Activity.new
+             @activity.user_id = current_user.id     #the recipient
+             @activity.action = "#{current_user.fname} has created an order from #{@order.resturant} for #{@order.kind}"
+             @activity.order_id = @order.id
+             @activity.recipient_id = User.where(email: mail).first.id 
+             @activity.save    
+
       }
       $list=[]
+
       redirect_to '/orders'
       uploaded_io = params.require(:order)[:menu]
     end
@@ -139,6 +155,23 @@ class AddOrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.status="cancel"
     @order.save()
+    @order_friends = ActiveRecord::Base.connection.execute("SELECT * FROM order_friends WHERE  status = 'joined' and orders_id = #{@order}") #i have all items for specified order
+    @order_creator = User.find(@order.user_id)
+    if @order_friends
+      @order_friends.each do |order_friend|
+
+        @user_obj = User.find(order_friend[3])
+        @notification = Notification.new
+        @notification.user_id = @user_obj.id     #the recipient
+        @notification.actor_id = @order_creator.id
+        @notification.action = "#{@order_creator.fname} Canceled the order."
+        @notification.order_id = @order.id
+        @notification.save  
+
+      end
+    end
+
+
     redirect_to '/orders'
   end
 
@@ -148,6 +181,14 @@ class AddOrdersController < ApplicationController
       @order = Order.find(params[:id])
       @order.status="finish"
       @order.save()
+
+      @notification = Notification.new
+      @notification.user_id = @user_obj.id     #the recipient
+      @notification.actor_id = @order_creator.id
+      @notification.action = "#{@order_creator.fname} Canceled the order."
+      @notification.order_id = @order.id
+      @notification.save  
+
       redirect_to '/orders'
       # @order = Order.find(params[:id])
       #
