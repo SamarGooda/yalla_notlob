@@ -12,11 +12,16 @@ class AddOrdersController < ApplicationController
     if params[:commit] == 'Add'
       @parameter = params[:search]
       @user = User.where(email: @parameter).first
-      # p("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
       # p(@parameter)
       if @user
-        if not $list.include? @parameter
-          $list.append(@parameter)
+          @invited_code = @user.id
+          @friend =Friend.where(friend_id: @invited_code).where(user_id: current_user)
+          p(@friend)
+          if @friend
+
+            if not $list.include? @parameter
+              $list.append(@parameter)
+            end
           end
         p($list)
         # $list.append(@parameter)
