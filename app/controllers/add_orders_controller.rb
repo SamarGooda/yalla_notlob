@@ -53,13 +53,13 @@ class AddOrdersController < ApplicationController
       @order.status = "waiting"
       @order.save
       #loop list f friends
-      # $list.each { |mail|
-      #        @friend = OrderFriend.new
-      #         @friend.orders_id = @order.id
-      #         @friend.user_id =  User.where(email: mail).first.id
-      #         @friend.status = "invite"
-      #        @friend.save()
-      # }
+      $list.each { |mail|
+             @friend = OrderFriend.new
+              @friend.orders_id = @order.id
+              @friend.user_id =  User.where(email: mail).first.id
+              @friend.status = "invite"
+             @friend.save()
+      }
       redirect_to '/orders'
       uploaded_io = params.require(:order)[:menu]
     end
