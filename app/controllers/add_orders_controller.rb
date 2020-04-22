@@ -218,6 +218,7 @@ class AddOrdersController < ApplicationController
   end
 
   def show_joined_friends
+
     #i have all items for specified order
     @order = Order.find(params[:id])
     @order_id = @order.id
@@ -241,12 +242,18 @@ class AddOrdersController < ApplicationController
     @invited_friends = ActiveRecord::Base.connection.execute("SELECT * FROM order_friends WHERE  status = 'invite' and orders_id = #{@order.id}")
   end
 
+  def get_order_id
+    @order_id = params[:id]
+  end
 
-  def delete_invited_friend
+  def delete_invited_friend 
+    
     # @friend = OrderFriend.find(params[:id])
     puts("yabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
-    puts(params[:id])
-    @user = ActiveRecord::Base.connection.execute("DELETE FROM order_friends WHERE status = 'invite' and user_id = #{params[:id]};")
+    puts(params[:id], get_order_id)
+    @order_id = get_order_id
+    # puts(Params[:name])
+    @user = ActiveRecord::Base.connection.execute("DELETE FROM order_friends WHERE status = 'invite' and user_id = #{params[:id]} and orders_id =#{@order_id}")
 
     redirect_to action: :show_invited_friends
   end

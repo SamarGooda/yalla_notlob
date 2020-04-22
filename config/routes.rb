@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
 
   # post 'orders/:id', to: 'add'
-  get '/orders/:id', to: 'add_orders#order_details'
+  get '/orders/:id', to: 'add_orders#order_details', :as => 'order_details'
   # post '/orders/:id', to: 'add_orders#order_details'
   post '/orders/:id/save_items', to: 'add_orders#save_items'
   get '/orders/:id/show_joined_friends', to: 'add_orders#show_joined_friends'
