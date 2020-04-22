@@ -18,7 +18,7 @@
                                 <img src="/images/res_img_5.jpg" class="img-responsive">
                             </figure>
                             <div>
-                                <h3><%= order.kind %></h3>
+                            <h3><a href="/orders/<%= order.id.to_s %>"><%= order.kind  %></a></h3>
                                 <p><%= localize(order.created_at, :format => :long) %></p>
                             </div>
                         </div>
@@ -34,15 +34,15 @@
             <div class="fh5co-food-menu to-animate-2">
                 <h2 class="fh5co-dishes">Latest activities</h2>
                 <ul>
-                <% @orders.each do |order| %>
+                <% @activities.each do |activity| %>
                     <li>
                         <div class="fh5co-food-desc">
                             <figure>
                                 <img src="/images/res_img_5.jpg" class="img-responsive">
                             </figure>
                             <div>
-                                <h3><%= order.kind %></h3>
-                                <p><%= localize(order.created_at, :format => :long) %></p>
+                                <h3><a href="/orders/<%= activity.order_id.to_s %>"><%= activity.action %></a></h3>
+                                <p><%= localize(activity.created_at, :format => :long) %></p>
                             </div>
                         </div>
                     

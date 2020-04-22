@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   post '/orders/:id/save_items', to: 'add_orders#save_items'
   # get '/orders' => 'list_orders#index'
   post '/add' => 'add_orders#add'
+  post '/search' => 'add_orders#search'
+
+ 
   post '/cancel/:id' => 'add_orders#cancel'
   post '/finish/:id' => 'add_orders#finish'
   get '/friends/search' => 'friends#search', :as => 'search_page'
