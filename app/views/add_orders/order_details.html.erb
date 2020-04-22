@@ -45,6 +45,18 @@
 </div>
 
 <% end %>
-<a >show joined friends</a><br>
-<a >show invited friends</a>
+<%if @joined_friends_num%>
+<%@joined_friends_num.each do |jNnum|%>
+  <span><%= jNnum %></span>
+<%end%>
+<%end%>
+<%= link_to 'show joined friends', "http://127.0.0.1:3000/orders/#{@order_id}/show_joined_friends", method: :get %><br>
+
+<%if @invited_friends_num%>
+<%@invited_friends_num.each do |iNum|%>
+  <span><%= iNum %></span>
+<%end%>
+<%end%>
+<%= link_to 'show invited friends', "http://127.0.0.1:3000/orders/#{@order_id}/show_invited_friends", method: :get %>
+
 

@@ -1,0 +1,17 @@
+<div class="text-center">
+  <div class="alert alert-success" role="alert">
+    <h1 class="alert-heading">Invited Friends</h1>
+  </div>
+</div>
+
+
+<% if @invited_friends %>
+    <% @invited_friends.each do |invited_friend| %>
+    <%@user = User.find(invited_friend[3])%>
+    <h2><%= @user.fname %>
+    <%= @user.lname%>
+    </h2>
+    <%# <%= link_to 'Remove friend',action:  :delete_invited_friend %> 
+    <%= link_to 'Remove', "http://127.0.0.1:3000/orders/#{@order_id}/show_invited_friends/#{@user.id}", method: :get %>
+    <%end%>
+<% end %>

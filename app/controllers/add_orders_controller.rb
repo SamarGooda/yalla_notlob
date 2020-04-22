@@ -87,6 +87,9 @@ class AddOrdersController < ApplicationController
         @order_object = Order.find(params[:id])
         @order_id = @order_object.id
         @all_orders = ActiveRecord::Base.connection.execute("SELECT * FROM order_items WHERE  order_id = #{@order_id}") #i have all items for specified order
+        @joined_friends_num = ActiveRecord::Base.connection.execute("SELECT COUNT(*) FROM order_friends WHERE status = 'joined' and orders_id = #{@order_id}")
+        @invited_friends_num = ActiveRecord::Base.connection.execute("SELECT COUNT(*) FROM order_friends WHERE status = 'invite' and orders_id = #{@order_id}")
+        
         if @all_orders
           @all_orders.each do |order|
             @user_id = order[6]
@@ -195,7 +198,6 @@ class AddOrdersController < ApplicationController
     end
 
   def delete
-    p("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
     p(params)
     for i in $list
        i == params.id
@@ -214,6 +216,41 @@ class AddOrdersController < ApplicationController
     @notification.save  
 
   end
+
+  def show_joined_friends
+    #i have all items for specified order
+    @order = Order.find(params[:id])
+    @order_id = @order.id
+    @order_friends = ActiveRecord::Base.connection.execute("SELECT * FROM order_friends WHERE  status = 'joined' and orders_id = #{@order.id}")
+    
+    puts("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxzzzzzzzzzzzsssa",@friends_num)
+    if @order_friends and @friends_num
+      @order_friends.each do |joined_friend|
+        @user = User.find(joined_friend[3])
+        
+      end
+    end
+    
+  end
+
+
+
+  def show_invited_friends
+    @order = Order.find(params[:id])
+    @order_id = @order.id
+    @invited_friends = ActiveRecord::Base.connection.execute("SELECT * FROM order_friends WHERE  status = 'invite' and orders_id = #{@order.id}")
+  end
+
+
+  def delete_invited_friend
+    # @friend = OrderFriend.find(params[:id])
+    puts("yabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
+    puts(params[:id])
+    @user = ActiveRecord::Base.connection.execute("DELETE FROM order_friends WHERE status = 'invite' and user_id = #{params[:id]};")
+
+    redirect_to action: :show_invited_friends
+  end
+
 
 end
 

@@ -13,11 +13,14 @@ Rails.application.routes.draw do
   get '/orders/:id', to: 'add_orders#order_details'
   # post '/orders/:id', to: 'add_orders#order_details'
   post '/orders/:id/save_items', to: 'add_orders#save_items'
+  get '/orders/:id/show_joined_friends', to: 'add_orders#show_joined_friends'
+  get '/orders/:id/show_invited_friends', to: 'add_orders#show_invited_friends'
+  get '/orders/:id/show_invited_friends/:id', to: 'add_orders#delete_invited_friend'
   # get '/orders' => 'list_orders#index'
   post '/add' => 'add_orders#add'
   post '/search' => 'add_orders#search'
 
- 
+  
   post '/cancel/:id' => 'add_orders#cancel'
   post '/finish/:id' => 'add_orders#finish'
   get '/friends/search' => 'friends#search', :as => 'search_page'

@@ -1,0 +1,15 @@
+<div class="text-center">
+  <div class="alert alert-success" role="alert">
+    <h1 class="alert-heading">Joined Friends</h1>
+  </div>
+</div>
+
+<% if @order_friends %>
+    <% @order_friends.each do |joined_friend| %>
+    <%@user = User.find(joined_friend[3])%>
+    <h2><%= @user.fname %>
+    <%= @user.lname%>
+    </h2>
+
+    <%end%>
+<% end %>
