@@ -77,7 +77,6 @@ class AddOrdersController < ApplicationController
             puts(@user.id)
           end
         end
-        # @user = User.find(@all_orders.user_id) #this returns the user who created the order not the user who added items to order
       end
   
 
@@ -85,9 +84,13 @@ class AddOrdersController < ApplicationController
     @order_object = Order.find(params[:id])
     @order_id = @order_object.id
     @user = User.find(current_user.id)
-    @user_status = OrderFriend.find(params[:id])
-    @user_status.status = "joined" 
-    @user_status.save
+    @order_friends = ActiveRecord::Base.connection.execute("SELECT * FROM order_friends WHERE  user_id = #{current_user.id} and orders_id = #{@order_id}") #i have all items for specified order
+    if @order_friends
+      @order_friends.each do |status|
+        puts("statttttttttttttussssssaaaaaaasss")
+        puts(status)
+      end
+    end    
 
 
     @order = OrderItem.new
