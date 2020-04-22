@@ -1,8 +1,9 @@
 class AddOrdersController < ApplicationController
   $list = []
-
+  # $order = Order.new
   def index
-    @order = Order.new
+    # @order =$order
+    @order=Order.new
     @member_list = $list
   end
 
@@ -11,39 +12,43 @@ class AddOrdersController < ApplicationController
     if params[:commit] == 'Add'
       @parameter = params[:search]
       @user = User.where(email: @parameter).first
+      # p(@parameter)
       if @user
-        # for i in $list do
-        #   p(i)
-        #   p(@parameter)
-        #   if i == @parameter
-        #     p(i)
-        #     p(@parameter)
-        #   else
-        #     p(i)
-        #     p(@parameter)
-        #     $list.append(@parameter)
-        #   end
-        # end
-        $list.append(@parameter)
-        @order = Order.new
+          @invited_code = @user.id
+          @friend =Friend.where(friend_id: @invited_code).where(user_id: current_user)
+          p(@friend)
+          if @friend
+
+            if not $list.include? @parameter
+              $list.append(@parameter)
+            end
+          end
+        p($list)
+        # $list.append(@parameter)
+        # @order =$order
+        @order=Order.new
         @order.kind = params.require(:order)[:kind]
         @order.resturant = params.require(:order)[:resturant]
         @order.status = params.require(:order)[:status]
         @order.image = params.require(:order)[:img]
         @member_list = $list
+        # redirect_to '/orders/add'
         render :index
       else
-        @order = Order.new
+        # @order =$order
+        @order=Order.new
         @order.kind = params.require(:order)[:kind]
         @order.resturant = params.require(:order)[:resturant]
         @order.status = params.require(:order)[:status]
         @order.image = params.require(:order)[:img]
         @member_list = $list
+        # redirect_to '/orders/add'
         render :index
       end
 
     elsif params[:commit] == 'Publish'
-      @order = Order.new
+      # @order =$order
+      @order=Order.new
       @order.kind = params.require(:order)[:kind]
       @order.resturant = params.require(:order)[:resturant]
       @order.status = params.require(:order)[:status]
@@ -51,16 +56,16 @@ class AddOrdersController < ApplicationController
 
       @order.user_id = current_user.id
       @order.status = "waiting"
-      # @order.img=params.require (:order)[menu: uploaded_io.original_filename]
-      # @order.menu = params.require(:order)[:menu].original_filename
-
       @order.save
       #loop list f friends
-       @friend = OrderFriend.new
+      $list.each { |mail|
+             @friend = OrderFriend.new
               @friend.orders_id = @order.id
-              @friend.user_id = current_user.id
+              @friend.user_id =  User.where(email: mail).first.id
               @friend.status = "invite"
-      @friend.save()
+             @friend.save()
+      }
+      $list=[]
       redirect_to '/orders'
       uploaded_io = params.require(:order)[:menu]
     end
@@ -129,10 +134,37 @@ class AddOrdersController < ApplicationController
     end
 
 
-    def search
+  def cancel
+    p(params)
+    @order = Order.find(params[:id])
+    @order.status="cancel"
+    @order.save()
+    redirect_to '/orders'
+  end
+
+
+    def finish
+      p(params)
+      @order = Order.find(params[:id])
+      @order.status="finish"
+      @order.save()
+      redirect_to '/orders'
+      # @order = Order.find(params[:id])
+      #
+      # @order.destroy()
+      # redirect_to '/orders'
+
 
     end
 
+  def delete
+    p("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+    p(params)
+    for i in $list
+       i == params.id
+       $list -= [i]
+    end
+  end
 
   end
 

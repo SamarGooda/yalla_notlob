@@ -4,13 +4,14 @@
 <%#= form_for [@user,@order] do |f| %>
 <head>
   <link rel="stylesheet" href="/css/add_orders.css">
-  <script language="JavaScript">
-      function showInput() {
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!--  <script language="JavaScript">-->
+<!--      function showInput() {-->
 
-          document.getElementById('display').innerHTML += " " + document.getElementById("user_input").value;
+<!--          document.getElementById('display').innerHTML += " " + document.getElementById("user_input").value;-->
 
-      }
-  </script>
+<!--      }-->
+<!--  </script>-->
 </head>
 <body>
 <div class="main">
@@ -20,9 +21,8 @@
     <div class="container">
       <div class="signup-content">
         <div class="signup-form">
-          <%= form_for(@order, url: "/add") do |f| %>
+          <%= form_for(@order, method: "POST" ,url: "/add") do |f| %>
 
-            <%#= form_tag({:controller=>'company_infos', :action=>"buy"}, method: :get) do %>
 
             <div class="alert alert-success center" role="alert">
 
@@ -47,12 +47,7 @@
                 </ul>
               </div>
 
-              <div class="custom-file">
 
-                <%= f.label :img do %>
-                  <%= f.file_field :img, value: @order.image %>
-                <% end %>
-              </div>
               <br>
 
               <%#= form_tag(search_page_path, class: 'navbar-form navbar-left') do %>
@@ -86,9 +81,15 @@
               <!--                <input type="submit" value="add to list"><br/>-->
               <br/>
               <%= f.submit 'Add' %>
-              <br><br><br>
+              <br><br>
+              <div class="custom-file">
 
+                <%= f.label :img do %>
+                  <%= f.file_field :img, value: @order.image %>
+                <% end %>
+              </div>
 
+              <br><br>
               <div class="action row">
                 <div class="col-sm-10">
                   <div class="form-group form-button">
@@ -132,7 +133,11 @@
             <p><span id='display'>
 
                <% @member_list.each do |user| %>
-                    <tr> <td><%= user %></td> </tr>
+                <tr> <td><%= user %>
+                  <%#= link_to "Delete", "/delete_friend" ,class:"delete" %>
+                  <a href="#" class="delete" data-id="<%= user %>">delete</a>
+                  <br> <br></td></tr>
+
               <% end %>
 
             </span></p>
@@ -144,5 +149,19 @@
     <!--    </div>-->
   </section>
 </div>
+<script>
+
+    // const btn =document.getElementsByClassName("delete")
+    $(document).on('click' ,'.delete',function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        alert(id);
+        axios.post('/orders/delete',{id}).then(res => member_list = list) ;
+    });
+
+
+
+</script>
+
 </body>
 
