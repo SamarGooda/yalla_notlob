@@ -5,15 +5,15 @@ class Notifications
         @setup() if @notifications.length > 0
     setup: ->
         $("[data-behavior='notifications-link']").on "click", @handleClick
-        # setInterval () =>
-        #     $.ajax(
-        #         url: "/notifications.json"
-        #         dataType: "JSON"
+        setInterval () =>
+            $.ajax(
+                url: "/notifications.json"
+                dataType: "JSON"
                 
-        #         method: "GET"
-        #         success: @handleSuccess
-        #     )
-        # ,5000
+                method: "GET"
+                success: @handleSuccess
+            )
+        ,5000
 
         $.ajax(
             url: "/notifications.json"
@@ -34,10 +34,18 @@ class Notifications
 
     handleSuccess: (data) =>
         items = $.map data, (notification) ->
-            "<div class='dropdown-item' style='font-size: 15px;line-height: 1.6; border-bottom: 0.5px solid grey;'>
-            #{notification.action}
-            <a href=http://127.0.0.1:3000/orders/#{notification.order_id} onclick='hideButton(this)'>Join</a>
-            </div>"
+            if notification.type == "invite"
+                "<div class='dropdown-item' style='font-size: 15px;line-height: 1.6; border-bottom: 0.5px solid grey;'>
+                #{notification.action}
+                <a href=http://127.0.0.1:3000/orders/#{notification.order_id} onclick='hideButton(this)'>Join</a>
+                </div>"
+            
+
+            else 
+                "<div class='dropdown-item' style='font-size: 15px;line-height: 1.6; border-bottom: 0.5px solid grey;'>
+                #{notification.action}
+                </div>"
+
         counter = 0
         for value in data
             if !value.read_at then counter=counter+1

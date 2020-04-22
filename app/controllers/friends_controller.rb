@@ -32,7 +32,7 @@ class FriendsController < ApplicationController
     if @my_friends
       @my_friends.each do |friend|
         p("friend is ", friend[5])
-        @each_friend_detail = ActiveRecord::Base.connection.execute("SELECT * FROM users WHERE  id = #{friend[5]}")
+        @each_friend_detail = ActiveRecord::Base.connection.execute("SELECT * FROM users WHERE  id = #{friend[5]} ")
         @each_friend_order = ActiveRecord::Base.connection.execute("SELECT * FROM orders WHERE  user_id = #{friend[5]}")
 
     end

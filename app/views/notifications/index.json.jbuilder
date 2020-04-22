@@ -4,4 +4,5 @@ json.array! @notifications do |notification|
     json.action notification.action
     json.order_id notification.order_id
     json.read_at notification.read_at
+    json.type notification.notification_type
 end

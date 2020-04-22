@@ -64,14 +64,10 @@ class AddOrdersController < ApplicationController
               @friend.user_id =  User.where(email: mail).first.id
               @friend.status = "invite"
               @friend.save()
-
-             @notification = Notification.new
-             @notification.user_id = User.where(email: mail).first.id      #the recipient
-             @notification.actor_id = current_user.id
-             @notification.action = "#{current_user.fname} Invited you to his order."
-             @notification.order_id = @order.id
-             @notification.save
-
+              user_id = User.where(email: mail).first.id 
+              action = "#{current_user.fname} Invited you to his order."
+              type = "invite"
+              create_notification(user_id,  current_user.id, action, type, @order.id)
              @activity = Activity.new
              @activity.user_id = current_user.id     #the recipient
              @activity.action = "#{current_user.fname} has created an order from #{@order.resturant} for #{@order.kind}"
@@ -105,9 +101,11 @@ class AddOrdersController < ApplicationController
     @order_object = Order.find(params[:id])
     @order_id = @order_object.id
     @user = User.find(current_user.id)
+    # for changing the status for person from invite to joined
     @order_friends = ActiveRecord::Base.connection.execute("SELECT * FROM order_friends WHERE  user_id = #{current_user.id} and orders_id = #{@order_id}") #i have all items for specified order
     if @order_friends
       @order_friends.each do |status|
+        ActiveRecord::Base.connection.execute("UPDATE order_friends SET status='joined' WHERE user_id = #{current_user.id} and orders_id=#{@order_id}")
         puts("statttttttttttttussssssaaaaaaasss")
         puts(status)
       end
@@ -155,19 +153,14 @@ class AddOrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.status="cancel"
     @order.save()
-    @order_friends = ActiveRecord::Base.connection.execute("SELECT * FROM order_friends WHERE  status = 'joined' and orders_id = #{@order}") #i have all items for specified order
+    @order_friends = ActiveRecord::Base.connection.execute("SELECT * FROM order_friends WHERE  status = 'joined' and orders_id = #{@order.id}") #i have all items for specified order
     @order_creator = User.find(@order.user_id)
     if @order_friends
       @order_friends.each do |order_friend|
-
         @user_obj = User.find(order_friend[3])
-        @notification = Notification.new
-        @notification.user_id = @user_obj.id     #the recipient
-        @notification.actor_id = @order_creator.id
-        @notification.action = "#{@order_creator.fname} Canceled the order."
-        @notification.order_id = @order.id
-        @notification.save  
-
+        @action =  "#{@order_creator.fname} Canceled the order."
+        @type = "cancel"
+        create_notification(@user_obj.id,  @order_creator.id, @action, @type, @order.id)  
       end
     end
 
@@ -181,15 +174,18 @@ class AddOrdersController < ApplicationController
       @order = Order.find(params[:id])
       @order.status="finish"
       @order.save()
-
-      @notification = Notification.new
-      @notification.user_id = @user_obj.id     #the recipient
-      @notification.actor_id = @order_creator.id
-      @notification.action = "#{@order_creator.fname} Canceled the order."
-      @notification.order_id = @order.id
-      @notification.save  
-
+      @order_creator = User.find(@order.user_id)
+      @order_friends = ActiveRecord::Base.connection.execute("SELECT * FROM order_friends WHERE  status = 'joined' and orders_id = #{@order.id}") #i have all items for specified order
+      if @order_friends
+        @order_friends.each do |order_friend|
+          @user_obj = User.find(order_friend[3])
+          @type = "finished"
+          @action = "#{@order_creator.fname} the order finished."
+          create_notification(@user_obj.id, @order_creator.id, @action, @type, @order.id)
       redirect_to '/orders'
+        end
+      end
+
       # @order = Order.find(params[:id])
       #
       # @order.destroy()
@@ -207,5 +203,17 @@ class AddOrdersController < ApplicationController
     end
   end
 
+  def create_notification(user_id, actor_id, action, type, order_id)
+
+    @notification = Notification.new
+    @notification.user_id = user_id     #the recipient
+    @notification.actor_id = actor_id
+    @notification.action = action
+    @notification.notification_type = type
+    @notification.order_id = order_id
+    @notification.save  
+
   end
+
+end
 
