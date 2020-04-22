@@ -60,6 +60,7 @@ class AddOrdersController < ApplicationController
               @friend.status = "invite"
              @friend.save()
       }
+      $list=[]
       redirect_to '/orders'
       uploaded_io = params.require(:order)[:menu]
     end
