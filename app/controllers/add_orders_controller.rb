@@ -5,10 +5,6 @@ class AddOrdersController < ApplicationController
     # @order =$order
     @order=Order.new
     @member_list = $list
-  end
-
-  def add
-
     if params[:commit] == 'Add'
       @parameter = params[:search]
       @user = User.where(email: @parameter).first
@@ -23,7 +19,6 @@ class AddOrdersController < ApplicationController
               $list.append(@parameter)
             end
           end
-        p($list)
         # $list.append(@parameter)
         # @order =$order
         @order=Order.new
@@ -33,7 +28,6 @@ class AddOrdersController < ApplicationController
         @order.image = params.require(:order)[:img]
         @member_list = $list
         # redirect_to '/orders/add'
-        render :index
       else
         # @order =$order
         @order=Order.new
@@ -43,49 +37,52 @@ class AddOrdersController < ApplicationController
         @order.image = params.require(:order)[:img]
         @member_list = $list
         # redirect_to '/orders/add'
-        render :index
       end
-
     elsif params[:commit] == 'Publish'
-      # @order =$order
-      @order=Order.new
-      @order.kind = params.require(:order)[:kind]
-      @order.resturant = params.require(:order)[:resturant]
-      @order.status = params.require(:order)[:status]
-      @order.image = params.require(:order)[:img]
-
-      @order.user_id = current_user.id
-      @order.status = "waiting"
-      @order.save
-      #loop list f friends
-      $list.each { |mail|
-             @friend = OrderFriend.new
-              @friend.orders_id = @order.id
-              @friend.user_id =  User.where(email: mail).first.id
-              @friend.status = "invite"
-              @friend.save()
-
-             @notification = Notification.new
-             @notification.user_id = User.where(email: mail).first.id      #the recipient
-             @notification.actor_id = current_user.id
-             @notification.action = "#{current_user.fname} Invited you to his order."
-             @notification.order_id = @order.id
-             @notification.save
-
-             @activity = Activity.new
-             @activity.user_id = current_user.id     #the recipient
-             @activity.action = "#{current_user.fname} has created an order from #{@order.resturant} for #{@order.kind}"
-             @activity.order_id = @order.id
-             @activity.recipient_id = User.where(email: mail).first.id 
-             @activity.save    
-
-      }
-      $list=[]
-
-      redirect_to '/orders'
-      uploaded_io = params.require(:order)[:menu]
+        # @order =$order
+        @order=Order.new
+        @order.kind = params.require(:order)[:kind]
+        @order.resturant = params.require(:order)[:resturant]
+        @order.status = params.require(:order)[:status]
+        @order.image = params.require(:order)[:img]
+  
+        @order.user_id = current_user.id
+        @order.status = "waiting"
+        @order.save
+        #loop list f friends
+        $list.each { |mail|
+               @friend = OrderFriend.new
+                @friend.orders_id = @order.id
+                @friend.user_id =  User.where(email: mail).first.id
+                @friend.status = "invite"
+                @friend.save()
+  
+               @notification = Notification.new
+               @notification.user_id = User.where(email: mail).first.id      #the recipient
+               @notification.actor_id = current_user.id
+               @notification.action = "#{current_user.fname} Invited you to his order."
+               @notification.order_id = @order.id
+               @notification.save
+  
+               @activity = Activity.new
+               @activity.user_id = current_user.id     #the recipient
+               @activity.action = "#{current_user.fname} has created an order from #{@order.resturant} for #{@order.kind}"
+               @activity.order_id = @order.id
+               @activity.recipient_id = User.where(email: mail).first.id 
+               @activity.save    
+  
+        }
+        $list=[]
+  
+        redirect_to '/orders'
+        uploaded_io = params.require(:order)[:menu]
+      
     end
+
+
   end
+
+
 
   def order_details
         @order_object = Order.find(params[:id])
@@ -200,12 +197,12 @@ class AddOrdersController < ApplicationController
     end
 
   def delete
-    p("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
     p(params)
     for i in $list
-       i == params.id
+       i == params[:email]
        $list -= [i]
     end
+    render JSON(list: $list)
   end
 
   end

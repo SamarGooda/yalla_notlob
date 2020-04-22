@@ -22,7 +22,7 @@
     <div class="container">
       <div class="signup-content">
         <div class="signup-form">
-          <%= form_for(@order, method: "POST" ,url: "/add") do |f| %>
+          <%= form_for(@order, method: "get" ,url: "/orders/add") do |f| %>
 
 
             <div class="alert alert-success center" role="alert">
@@ -135,8 +135,7 @@
 
                <% @member_list.each do |user| %>
                 <tr> <td><%= user %>
-                  <%#= link_to "Delete", "/delete_friend" ,class:"delete" %>
-                  <a href="#" class="delete" data-id="<%= user %>">delete</a>
+                  <a href="" class="delete" data-id="<%= user %>">delete</a>
                   <br> <br></td></tr>
 
               <% end %>
@@ -152,12 +151,11 @@
 </div>
 <script>
 
-    // const btn =document.getElementsByClassName("delete")
     $(document).on('click' ,'.delete',function(e) {
         e.preventDefault();
         var id = $(this).data('id');
-        alert(id);
-        axios.post('/orders/delete',{id}).then(res => member_list = list) ;
+        axios.get('/orders/delete',{email: id}).then((res)=>{
+        }) ;
     });
 
 

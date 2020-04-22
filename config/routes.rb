@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root :to => "authintication#index"
   get '/home' => 'home#index'
   get '/orders/add' => 'add_orders#index'
+  get '/orders/delete' => 'add_orders#delete'
   get '/orders' => 'add_orders#list'
 
 
