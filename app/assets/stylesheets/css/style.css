@@ -819,13 +819,13 @@ p {
   padding-left: 80px;
 }
 #fh5co-menus .fh5co-food-menu h2.fh5co-dishes:before {
-  background: url(../images/0302-steak.png) no-repeat;
+  background: url(../images/0401-vegan.png) no-repeat;
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 64px;
-  height: 45px;
+  height: 52px;
 }
 #fh5co-menus .fh5co-food-menu ul {
   padding: 0;

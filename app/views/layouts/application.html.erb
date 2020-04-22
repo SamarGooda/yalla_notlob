@@ -12,7 +12,7 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'true' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-	
+	<link rel="stylesheet" href="/css/style.css">
   <!-- Modernizr JS -->
   <script src="/js/modernizr-2.6.2.min.js"></script>
 	</head>
@@ -47,6 +47,7 @@
 							</div>
 							
 						</li>
+
 					<% end %>
 					</div>
 				</div>
@@ -59,7 +60,7 @@
 		<%= yield %>
 	</div>
 
-	<div id="fh5co-footer" style= "position:absolute; top:7500px;">
+	<div id="fh5co-footer">
 		<div class="container">
 			<div class="row row-padded">
 				<div class="col-md-12 text-center">
